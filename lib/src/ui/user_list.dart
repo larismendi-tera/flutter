@@ -8,7 +8,7 @@ class UserList extends StatelessWidget {
     // bloc.fetchAllMovies();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Movies'),
+        title: Text('Listado de usuarios'),
       ),
       // body: StreamBuilder(
       //   stream: bloc.allMovies,
