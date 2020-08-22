@@ -23,7 +23,17 @@ class _LoginPageState extends State<LoginPage> {
           if (!snapshot.hasData || snapshot.hasError) {
             return _loginScreen(context);
           } else {
-            return Container();
+            return Scaffold(
+              body: Container(
+                child: Center(
+                  child: ButtonPurple(
+                      title: "Logout",
+                      onPress: () {
+                        userBloc.signOut();
+                      }),
+                ),
+              ),
+            );
           }
         });
   }
