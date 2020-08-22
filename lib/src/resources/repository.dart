@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'user_api_provider.dart';
-import '../models/user_model.dart';
+import 'event_provider.dart';
+import '../models/event.dart';
 
 class Repository {
-  final moviesApiProvider = UserApiProvider();
+  final eventsApiProvider = EventProvider();
 
-  Future<UserModel> fetchAllMovies() => moviesApiProvider.fetchMovieList();
+  Future<Event> fetchAllEvents() => eventsApiProvider.fetchEventList();
 }

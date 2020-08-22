@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-// import '../models/user_model.dart';
-// import '../blocs/users_bloc.dart';
+// import '../models/event.dart';
+// import '../blocs/events_bloc.dart';
 
-class UserList extends StatelessWidget {
+class EventList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // bloc.fetchAllMovies();
+    // bloc.fetchAllEvents();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Listado de usuarios'),
+        title: Text('Eventos'),
       ),
       // body: StreamBuilder(
-      //   stream: bloc.allMovies,
-      //   builder: (context, AsyncSnapshot<UserModel> snapshot) {
+      //   stream: bloc.allEvents,
+      //   builder: (context, AsyncSnapshot<Event> snapshot) {
       //     if (snapshot.hasData) {
       //       return buildList(snapshot);
       //     } else if (snapshot.hasError) {
@@ -24,7 +24,7 @@ class UserList extends StatelessWidget {
     );
   }
 
-//   Widget buildList(AsyncSnapshot<UserModel> snapshot) {
+//   Widget buildList(AsyncSnapshot<Event> snapshot) {
 //     return GridView.builder(
 //         itemCount: snapshot.data.results.length,
 //         gridDelegate:
