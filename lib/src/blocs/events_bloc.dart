@@ -1,21 +1,12 @@
-import '../resources/repository.dart';
-import 'package:rxdart/rxdart.dart';
-import '../models/event.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:rxdart/rxdart.dart';
+import 'package:myapp/src/resources/repository.dart';
+// import 'package:myapp/src/models/event.dart';
 
 class EventsBloc {
   final _repository = Repository();
-  final _eventsFetcher = PublishSubject<Event>();
 
-  Observable<Event> get allEvents => _eventsFetcher.stream;
-
-  fetchAllEvents() async {
-    Event itemModel = await _repository.fetchAllEvents();
-    _eventsFetcher.sink.add(itemModel);
-  }
-
-  dispose() {
-    _eventsFetcher.close();
-  }
+  Stream<QuerySnapshot> get stream => _repository.stream();
 }
 
 final bloc = EventsBloc();

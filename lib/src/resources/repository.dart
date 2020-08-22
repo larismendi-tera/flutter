@@ -1,9 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'event_provider.dart';
-import '../models/event.dart';
 
 class Repository {
   final eventsApiProvider = EventProvider();
 
-  Future<Event> fetchAllEvents() => eventsApiProvider.fetchEventList();
+  Stream<QuerySnapshot> stream() => eventsApiProvider.stream();
 }

@@ -1,39 +1,50 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-// import '../models/event.dart';
-// import '../blocs/events_bloc.dart';
+import 'package:myapp/src/models/event.dart';
+import 'package:myapp/src/blocs/events_bloc.dart';
 
 class EventList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // bloc.fetchAllEvents();
     return Scaffold(
       appBar: AppBar(
         title: Text('Eventos'),
       ),
-      // body: StreamBuilder(
-      //   stream: bloc.allEvents,
-      //   builder: (context, AsyncSnapshot<Event> snapshot) {
-      //     if (snapshot.hasData) {
-      //       return buildList(snapshot);
-      //     } else if (snapshot.hasError) {
-      //       return Text(snapshot.error.toString());
-      //     }
-      //     return Center(child: CircularProgressIndicator());
-      //   },
-      // ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: bloc.stream,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return LinearProgressIndicator();
+
+          return _buildList(context, snapshot.data.documents);
+        },
+      ),
     );
   }
 
-//   Widget buildList(AsyncSnapshot<Event> snapshot) {
-//     return GridView.builder(
-//         itemCount: snapshot.data.results.length,
-//         gridDelegate:
-//             new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-//         itemBuilder: (BuildContext context, int index) {
-//           return Image.network(
-//             'https://image.tmdb.org/t/p/w185${snapshot.data.results[index].poster_path}',
-//             fit: BoxFit.cover,
-//           );
-//         });
-//   }
+  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+    return ListView(
+      padding: const EdgeInsets.only(top: 20.0),
+      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+    );
+  }
+
+  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
+    final record = Event.fromSnapshot(data);
+
+    return Padding(
+      key: ValueKey(record.name),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        child: ListTile(
+          title: Text(record.name),
+          trailing: Text(record.description.toString()),
+          onTap: () => print(record),
+        ),
+      ),
+    );
+  }
 }
