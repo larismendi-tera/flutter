@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "514126462940",
+    "firebase_url": "https://teraton404app2.firebaseio.com",
+    "project_id": "teraton404app2",
+    "storage_bucket": "teraton404app2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514126462940:android:d26fde3c524c50fe239919",
+        "android_client_info": {
+          "package_name": "com.teraton404.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514126462940-59obk3pb7nf1ul2d6agegk95hsu1e3cq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teraton404.app",
+            "certificate_hash": "18c7b66bdaabe46a78fcef7420100009b0cf4b73"
+          }
+        },
+        {
+          "client_id": "514126462940-mraf2qsevcokct1bfshg24rb5qocm74n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp-Tg5s6yMkn_9aYdRdK6XiO3hW5miIxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "514126462940-mraf2qsevcokct1bfshg24rb5qocm74n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
