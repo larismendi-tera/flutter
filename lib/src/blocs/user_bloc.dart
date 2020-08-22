@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:myapp/src/repository/auth_repository.dart';
+import 'package:myapp/src/resources/fireauth_provider.dart';
 
 class UserBloc implements Bloc {
-  final authRepository = AuthRepository();
+  final fireAuthProvider = FireAuthProvider();
   //Flujo de datos -streams
   //Stream - firebase
   //StreamController
@@ -13,12 +13,12 @@ class UserBloc implements Bloc {
 
   //casos de uso
   //1. singnIn Googlw
-  Future<FirebaseUser> signIn() {
-    return authRepository.singInFirebase();
+  Future<FirebaseUser> singInFirebase() {
+    return fireAuthProvider.singInFirebase();
   }
 
   signOut() {
-    authRepository.signOut();
+    fireAuthProvider.signOut();
   }
 
   @override
