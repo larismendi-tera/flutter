@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "514126462940-59obk3pb7nf1ul2d6agegk95hsu1e3cq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teraton404.app",
+            "certificate_hash": "18c7b66bdaabe46a78fcef7420100009b0cf4b73"
+          }
+        },
+        {
           "client_id": "514126462940-mraf2qsevcokct1bfshg24rb5qocm74n.apps.googleusercontent.com",
           "client_type": 3
         }
