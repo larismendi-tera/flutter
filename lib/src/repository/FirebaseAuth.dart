@@ -7,9 +7,9 @@ class FirebaseAuthApi {
 
   Future<FirebaseUser> signIn() async {
     GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-    print(googleSignInAccount);
     GoogleSignInAuthentication gSA = await googleSignInAccount.authentication;
 
+    print(gSA);
     final AuthCredential authCredential = GoogleAuthProvider.getCredential(
         accessToken: gSA.accessToken, idToken: gSA.idToken);
 

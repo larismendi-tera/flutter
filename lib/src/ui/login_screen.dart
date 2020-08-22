@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:myapp/constants.dart';
 import 'package:myapp/src/blocs/bloc_user.dart';
+import 'package:myapp/src/ui/home_screen.dart';
 import 'widgets/button_purple.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,17 +24,7 @@ class _LoginPageState extends State<LoginPage> {
           if (!snapshot.hasData || snapshot.hasError) {
             return _loginScreen(context);
           } else {
-            return Scaffold(
-              body: Container(
-                child: Center(
-                  child: ButtonPurple(
-                      title: "Logout",
-                      onPress: () {
-                        userBloc.signOut();
-                      }),
-                ),
-              ),
-            );
+            return HomeScreen();
           }
         });
   }
