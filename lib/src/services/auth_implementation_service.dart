@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:myapp/main.dart';
+import 'package:myapp/locator.dart';
 import 'auth_service.dart';
 
 class AuthImplementationService implements AuthService {
