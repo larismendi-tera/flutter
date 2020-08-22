@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:myapp/constants.dart';
-import 'package:myapp/src/blocs/bloc_user.dart';
+import 'package:myapp/src/blocs/user_bloc.dart';
 import 'package:myapp/src/ui/home_screen.dart';
 import 'widgets/button_purple.dart';
 
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                     title: "Login",
                     onPress: () {
                       userBloc.signOut();
-                      userBloc.signIn().then((FirebaseUser user) =>
+                      userBloc.singInFirebase().then((FirebaseUser user) =>
                           {print(user), print("usuario: ${user.displayName}")});
                     }),
               )

@@ -32,11 +32,18 @@ dependencies:
   google_sign_in: 
   firebase_storage: ^2.1.0
   cloud_firestore: ^0.9.13
-  english_words: ^3.1.0
   rxdart: ^0.18.0
+  # get it
+  get_it: ^1.1.0
+  # http request
   http: ^0.12.0+1
   hidden_drawer_menu: ^2.0.1
   
+  # Stacked Arch
+  stacked: ^1.6.0
+  stacked_services: ^0.4.3
+  shared_preferences: ^0.5.10
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

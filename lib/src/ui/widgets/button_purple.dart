@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:myapp/constants.dart';
 
 class ButtonPurple extends StatelessWidget {
-  String title;
-  double width = 0.0;
-  double height = 200.0;
-  VoidCallback onPress;
+  final String title;
+  final VoidCallback onPress;
+  final double width;
+  final double height;
   ButtonPurple(
-      {Key,
-      key,
+      {Key key,
       @required this.title,
       @required this.onPress,
       this.width,
