@@ -16,6 +16,9 @@ class RepositoryImplementationService implements RepositoryService {
   final _fireStoreProvider = FireStoreProvider();
   // final _fireStorageProvider = FireStorageProvider();
 
+  Future<FirebaseUser> signInWithCredential(AuthCredential credential) =>
+      _fireAuthProvider.signInWithCredential(credential);
+
   Future<FirebaseUser> singInFirebase() => _fireAuthProvider.singInFirebase();
 
   Future<void> signOut() => _fireAuthProvider.signOut();

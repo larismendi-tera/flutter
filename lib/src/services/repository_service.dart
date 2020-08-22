@@ -7,6 +7,8 @@ import 'package:myapp/src/models/event.dart';
 import 'package:myapp/src/models/user.dart';
 
 abstract class RepositoryService {
+  Future<FirebaseUser> signInWithCredential(AuthCredential credential);
+
   Future<FirebaseUser> singInFirebase();
 
   Future<void> signOut();

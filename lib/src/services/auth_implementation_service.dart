@@ -67,15 +67,15 @@ class AuthImplementationService implements AuthService {
     GoogleSignInAccount googleUser = await GoogleSignIn()
         .signIn(); // new instance to avoid platform exception
     if (googleUser != null) {
-      // GoogleSignInAuthentication googleAuth =
-      //     await googleUser.authentication.catchError((error) => null);
+      GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication.catchError((error) => null);
 
-      // final AuthCredential credential = GoogleAuthProvider.getCredential(
-      //   accessToken: googleAuth.accessToken,
-      //   idToken: googleAuth.idToken,
-      // );
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-      firebaseUser = await _repository.singInFirebase();
+      firebaseUser = await _repository.signInWithCredential(credential);
     }
 
     if (firebaseUser != null) {
