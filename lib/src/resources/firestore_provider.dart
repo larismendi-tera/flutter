@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:myapp/src/models/event.dart';
@@ -65,13 +66,19 @@ class FireStoreProvider {
       StreamController<List<Event>>.broadcast();
 
   Future<void> createEvent(Event event) async {
-    _firestore.collection('events').document(event.documentId).setData({
-      'id': event.documentId,
-      'title': event.title,
-      'description': event.description,
-      'date': event.date,
-      'location': event.location
-    });
+    var user = await FirebaseAuth.instance.currentUser();
+    if (user != null) {
+      _firestore.collection('events').document(event.documentId).setData({
+        'id': event.documentId,
+        'title': event.title,
+        'description': event.description,
+        'date': event.date,
+        'location': event.location,
+        'creator': user
+      });
+    } else {
+      throw ("User Unauthenticated.");
+    }
   }
 
   Future getEventsOnceOff() async {

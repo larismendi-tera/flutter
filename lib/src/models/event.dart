@@ -6,6 +6,8 @@ class Event {
   final String description;
   final String date;
   final String location;
+  final String creator;
+  final String organizer;
   final String inventory;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -16,6 +18,8 @@ class Event {
       @required this.description,
       @required this.date,
       @required this.location,
+      @required this.creator,
+      @required this.organizer,
       this.inventory,
       this.createdAt,
       this.updatedAt});
@@ -23,10 +27,12 @@ class Event {
   Map<String, dynamic> toMap() {
     return {
       'documentId': documentId,
-      'name': title,
+      'title': title,
       'description': description,
       'date': date,
       'location': location,
+      'creator': creator,
+      'organizer': organizer,
       'inventory': inventory,
       'createdAt': createdAt,
       'updatedAt': updatedAt
@@ -42,6 +48,8 @@ class Event {
         description: map['description'],
         date: map['date'],
         location: map['location'],
+        creator: map['creator'],
+        organizer: map['organizer'],
         inventory: map['inventory'],
         createdAt: map['createdAt'],
         updatedAt: map['updatedAt']);
