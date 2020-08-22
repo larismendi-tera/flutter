@@ -7,8 +7,7 @@ class ButtonPurple extends StatelessWidget {
   final double width;
   final double height;
   ButtonPurple(
-      {Key,
-      key,
+      {Key key,
       @required this.title,
       @required this.onPress,
       this.width,

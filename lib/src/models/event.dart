@@ -1,31 +1,49 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 class Event {
-  final String name;
+  final String documentId;
+  final String title;
   final String description;
   final String date;
   final String location;
+  final String inventory;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final DocumentReference reference;
 
-  Event.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference);
+  Event(
+      {this.documentId,
+      @required this.title,
+      @required this.description,
+      @required this.date,
+      @required this.location,
+      this.inventory,
+      this.createdAt,
+      this.updatedAt});
 
-  Event.fromMap(Map<String, dynamic> map, {this.reference})
-      : assert(map['name'] != null),
-        assert(map['description'] != null),
-        assert(map['date'] != null),
-        assert(map['location'] != null),
-        assert(map['createdAt'] != null),
-        assert(map['updatedAt'] != null),
-        name = map['name'],
-        description = map['description'],
-        date = map['date'],
-        location = map['location'],
-        createdAt = map['createdAt'],
-        updatedAt = map['updatedAt'];
+  Map<String, dynamic> toMap() {
+    return {
+      'documentId': documentId,
+      'name': title,
+      'description': description,
+      'date': date,
+      'location': location,
+      'inventory': inventory,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt
+    };
+  }
 
-  @override
-  String toString() => "Record<$name:$description>";
+  static Event fromMap(Map<String, dynamic> map, String documentId) {
+    if (map == null) return null;
+
+    return Event(
+        documentId: map['documentId'],
+        title: map['title'],
+        description: map['description'],
+        date: map['date'],
+        location: map['location'],
+        inventory: map['inventory'],
+        createdAt: map['createdAt'],
+        updatedAt: map['updatedAt']);
+  }
 }

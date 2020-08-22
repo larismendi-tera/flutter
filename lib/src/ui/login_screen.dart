@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:myapp/constants.dart';
-import 'package:myapp/src/blocs/bloc_user.dart';
+import 'package:myapp/src/blocs/user_bloc.dart';
 import 'package:myapp/src/ui/home_screen.dart';
 import 'widgets/button_purple.dart';
 

@@ -1,0 +1,132 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+import 'package:myapp/src/models/event.dart';
+import 'package:myapp/src/models/user.dart';
+
+class FireStoreProvider {
+  Firestore _firestore = Firestore.instance;
+
+  Future<int> authenticateUser() async {
+    final QuerySnapshot result =
+        await _firestore.collection("users").getDocuments();
+    final List<DocumentSnapshot> docs = result.documents;
+    if (docs.length == 0) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+
+  Future<void> registerUser(User user) async {
+    _firestore.collection('users').document(user.id).setData({
+      'id': user.id,
+      'fullName': user.fullName,
+      'email': user.email,
+      'photoUrl': user.photoUrl
+    });
+  }
+
+  Future<User> getUser(String userId) async {
+    var result = await _firestore
+        .collection('users')
+        .where('id', isEqualTo: userId)
+        .getDocuments();
+    List<DocumentSnapshot> documents = result.documents;
+    if (documents.length == 1) {
+      return User(
+          id: documents[0]['id'],
+          fullName: documents[0]['fullName'],
+          email: documents[0]['email'],
+          photoUrl: documents[0]['photoUrl'],
+          birthday: documents[0]['birthday'],
+          aboutMe: documents[0]['aboutMe']);
+    }
+    return null;
+  }
+
+  Future<User> updateUser(User user) async {
+    return _firestore.collection("users").document(user.id).updateData({
+      'fullName': user.fullName,
+      'photoUrl': user.photoUrl,
+      'birthday': user.birthday,
+      'aboutMe': user.aboutMe,
+      'updatedAt': user.updatedAt
+    }).then((_) {
+      return getUser(user.id);
+    });
+  }
+
+  final CollectionReference _eventsCollectionReference =
+      Firestore.instance.collection('events');
+
+  final StreamController<List<Event>> _eventsController =
+      StreamController<List<Event>>.broadcast();
+
+  Future<void> createEvent(Event event) async {
+    _firestore.collection('events').document(event.documentId).setData({
+      'id': event.documentId,
+      'title': event.title,
+      'description': event.description,
+      'date': event.date,
+      'location': event.location
+    });
+  }
+
+  Future getEventsOnceOff() async {
+    try {
+      var eventDocumentSnapshot =
+          await _eventsCollectionReference.getDocuments();
+      if (eventDocumentSnapshot.documents.isNotEmpty) {
+        return eventDocumentSnapshot.documents
+            .map(
+                (snapshot) => Event.fromMap(snapshot.data, snapshot.documentID))
+            .where((mappedItem) => mappedItem.title != null)
+            .toList();
+      }
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
+
+  Stream listenToEventsRealTime() {
+    // Register the handler for when the events data changes
+    _eventsCollectionReference.snapshots().listen((eventsSnapshot) {
+      if (eventsSnapshot.documents.isNotEmpty) {
+        var events = eventsSnapshot.documents
+            .map(
+                (snapshot) => Event.fromMap(snapshot.data, snapshot.documentID))
+            .where((mappedItem) => mappedItem.title != null)
+            .toList();
+
+        // Add the events onto the controller
+        _eventsController.add(events);
+      }
+    });
+
+    return _eventsController.stream;
+  }
+
+  Future deleteEvent(String documentId) async {
+    await _eventsCollectionReference.document(documentId).delete();
+  }
+
+  Future updateEvent(Event event) async {
+    try {
+      await _eventsCollectionReference
+          .document(event.documentId)
+          .updateData(event.toMap());
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
+}
