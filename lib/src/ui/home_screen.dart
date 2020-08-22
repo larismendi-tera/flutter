@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:myapp/constants.dart';
+import 'package:myapp/src/blocs/bloc_user.dart';
 import 'package:myapp/src/ui/feed_screen.dart';
 import 'package:myapp/src/ui/detail_screen.dart';
 import 'package:myapp/src/ui/widgets/card_people.dart';
@@ -15,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<ScreenHiddenDrawer> items = new List();
+  UserBloc userBloc;
 
   @override
   void initState() {
@@ -29,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Perfil",
+          name: "Detail",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: kPrimaryColor,
@@ -37,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
         DetailScreen()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          onTap: () {},
+          onTap: () {
+            userBloc.signOut();
+          },
           name: "LogOut",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
@@ -50,6 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    userBloc = BlocProvider.of(context);
+
     return HiddenDrawerMenu(
       backgroundColorMenu: kBorderColor,
       backgroundColorAppBar: kBackgroudColor,

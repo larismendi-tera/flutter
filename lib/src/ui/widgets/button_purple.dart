@@ -4,7 +4,7 @@ import 'package:myapp/constants.dart';
 class ButtonPurple extends StatelessWidget {
   String title;
   double width = 0.0;
-  double height = 0.0;
+  double height = 200.0;
   VoidCallback onPress;
   ButtonPurple(
       {Key,
@@ -22,7 +22,7 @@ class ButtonPurple extends StatelessWidget {
         margin: EdgeInsets.only(
             top: 30.0, left: 20.0, right: 20.0, bottom: kDefaultPadding * 2),
         height: 45,
-        width: 200,
+        width: width,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.0), color: kPrimaryColor),
         child: Center(
