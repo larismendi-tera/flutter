@@ -5,5 +5,5 @@ import 'event_provider.dart';
 class Repository {
   final eventsApiProvider = EventProvider();
 
-  Stream<QuerySnapshot> stream() => eventsApiProvider.stream();
+  Stream<QuerySnapshot> eventStream() => eventsApiProvider.stream();
 }

@@ -11,7 +11,7 @@ class EventList extends StatelessWidget {
         title: Text('Eventos'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: bloc.stream,
+        stream: bloc.eventStream,
         builder: (context, snapshot) {
           if (!snapshot.hasData) return LinearProgressIndicator();
 

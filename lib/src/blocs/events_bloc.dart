@@ -6,7 +6,7 @@ import 'package:myapp/src/resources/repository.dart';
 class EventsBloc {
   final _repository = Repository();
 
-  Stream<QuerySnapshot> get stream => _repository.stream();
+  Stream<QuerySnapshot> get eventStream => _repository.eventStream();
 }
 
 final bloc = EventsBloc();
