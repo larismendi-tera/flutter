@@ -1,50 +1,62 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/src/models/event.dart';
+import 'package:stacked/stacked.dart';
 import 'package:myapp/src/blocs/events_bloc.dart';
 
 class EventList extends StatelessWidget {
+  const EventList({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Eventos'),
-      ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: bloc.eventStream,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) return LinearProgressIndicator();
-
-          return _buildList(context, snapshot.data.documents);
-        },
-      ),
-    );
-  }
-
-  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
-    return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
-      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
-    );
-  }
-
-  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final record = Event.fromSnapshot(data);
-
-    return Padding(
-      key: ValueKey(record.name),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: ListTile(
-          title: Text(record.name),
-          trailing: Text(record.description.toString()),
-          onTap: () => print(record),
-        ),
-      ),
-    );
+    return ViewModelBuilder<EventsBloc>.reactive(
+        viewModelBuilder: () => EventsBloc(),
+        onModelReady: (model) => model.getEventsList(),
+        builder: (context, model, child) => Scaffold(
+              backgroundColor: Colors.white,
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: Theme.of(context).primaryColor,
+                child: Icon(Icons.add),
+                onPressed: () {},
+              ),
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: 32),
+                    Row(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 20,
+                          child: Image.asset('assets/images/title.png'),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                        child: model.events != null
+                            ? ListView.builder(
+                                itemCount: model.events.length,
+                                itemBuilder: (context, index) =>
+                                    GestureDetector(
+                                  onTap: () {},
+                                  child: Text('Example'),
+                                  // PostItem(
+                                  //   //crear un widget
+                                  //   post: model.events[index],
+                                  //   onDeleteItem: () =>
+                                  //       model.deleteEvent(index),
+                                  // ),
+                                ),
+                              )
+                            : Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation(
+                                      Theme.of(context).primaryColor),
+                                ),
+                              ))
+                  ],
+                ),
+              ),
+            ));
   }
 }

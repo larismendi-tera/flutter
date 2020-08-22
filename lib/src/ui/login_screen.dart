@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                     title: "Login",
                     onPress: () {
                       userBloc.signOut();
-                      userBloc.signIn().then((FirebaseUser user) =>
+                      userBloc.singInFirebase().then((FirebaseUser user) =>
                           {print(user), print("usuario: ${user.displayName}")});
                     }),
               )

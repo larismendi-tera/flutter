@@ -24,7 +24,7 @@ class FireStoreProvider {
       'id': user.id,
       'fullName': user.fullName,
       'email': user.email,
-      'photoUrl': user.photoUrl
+      'avatar': user.avatar
     });
   }
 
@@ -39,7 +39,7 @@ class FireStoreProvider {
           id: documents[0]['id'],
           fullName: documents[0]['fullName'],
           email: documents[0]['email'],
-          photoUrl: documents[0]['photoUrl'],
+          avatar: documents[0]['avatar'],
           birthday: documents[0]['birthday'],
           aboutMe: documents[0]['aboutMe']);
     }
@@ -49,7 +49,7 @@ class FireStoreProvider {
   Future<User> updateUser(User user) async {
     return _firestore.collection("users").document(user.id).updateData({
       'fullName': user.fullName,
-      'photoUrl': user.photoUrl,
+      'avatar': user.avatar,
       'birthday': user.birthday,
       'aboutMe': user.aboutMe,
       'updatedAt': user.updatedAt

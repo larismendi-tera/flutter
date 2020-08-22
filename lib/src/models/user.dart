@@ -4,7 +4,7 @@ class User {
   final String id;
   final String fullName;
   final String email;
-  final String photoUrl;
+  final String avatar;
   final String birthday;
   final String aboutMe;
   final DateTime createdAt;
@@ -14,7 +14,7 @@ class User {
       {this.id,
       @required this.fullName,
       @required this.email,
-      @required this.photoUrl,
+      @required this.avatar,
       this.birthday,
       this.aboutMe,
       this.createdAt,
@@ -24,7 +24,7 @@ class User {
       : id = data['id'],
         fullName = data['fullName'],
         email = data['email'],
-        photoUrl = data['photoUrl'],
+        avatar = data['avatar'],
         birthday = data['birthday'],
         aboutMe = data['aboutMe'],
         createdAt = data['createdAt'],
@@ -35,7 +35,7 @@ class User {
       'id': id,
       'fullName': fullName,
       'email': email,
-      'photoUrl': photoUrl,
+      'avatar': avatar,
       'birthday': birthday,
       'aboutMe': aboutMe,
       'createdAt': createdAt,

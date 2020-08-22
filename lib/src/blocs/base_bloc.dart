@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-class BaseBloc {
+class BaseBloc extends ChangeNotifier {
   final _loading = BehaviorSubject<bool>();
 
   Observable<bool> get loadingObservable => _loading.stream;
