@@ -26,16 +26,6 @@ class EventBloc extends BaseBloc {
   getEventsList() async {
     setLoading(true);
     var event = await _provider.getEventsOnceOff();
-    /*.then((events) {
-      setLoading(false);
-      _events = events;
-      return events;
-    }).catchError((err) {
-      //print(err);
-      setLoading(false);
-      _uiActions.sink.add(new UiAction(
-          action: ACTIONS.showToast.index, message: err.toString()));
-    });*/
     _events = events;
     return event;
   }

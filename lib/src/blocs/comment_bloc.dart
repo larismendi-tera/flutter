@@ -1,4 +1,4 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:myapp/src/blocs/base_bloc.dart';
 import 'package:myapp/src/models/comment.dart';
@@ -23,16 +23,9 @@ class CommentBloc extends BaseBloc {
     _provider.createComment(comment);
   }
 
-  void getCommentsList() async {
-    setLoading(true);
-    _provider.getCommentsOnceOff().then((comments) {
-      setLoading(false);
-      _comments = comments;
-    }).catchError((err) {
-      setLoading(false);
-      _uiActions.sink.add(new UiAction(
-          action: ACTIONS.showToast.index, message: err.toString()));
-    });
+  getCommentsList(String eventId) async {
+    var comments = await _provider.getCommentList(eventId);
+    return comments;
   }
 
   void listenToCommentsRealTime() async {
@@ -48,26 +41,20 @@ class CommentBloc extends BaseBloc {
   }
 
   void deleteComment(String documentId) async {
-    setLoading(true);
     _provider.deleteComment(documentId).then((comment) {
-      setLoading(false);
       _uiActions.sink.add(new UiAction(
           action: ACTIONS.showToast.index, message: 'Delete success'));
     }).catchError((err) {
-      setLoading(false);
       _uiActions.sink.add(new UiAction(
           action: ACTIONS.showToast.index, message: err.toString()));
     });
   }
 
   void updateComment(Comment comment) async {
-    setLoading(true);
     _provider.updateComment(comment).then((comment) {
-      setLoading(false);
       _uiActions.sink.add(new UiAction(
           action: ACTIONS.showToast.index, message: 'Update success'));
     }).catchError((err) {
-      setLoading(false);
       _uiActions.sink.add(new UiAction(
           action: ACTIONS.showToast.index, message: err.toString()));
     });

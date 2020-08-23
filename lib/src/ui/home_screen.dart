@@ -6,8 +6,6 @@ import 'package:myapp/src/blocs/user_bloc.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:myapp/src/ui/form_event.dart';
 
-import 'event_list.dart';
-
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();

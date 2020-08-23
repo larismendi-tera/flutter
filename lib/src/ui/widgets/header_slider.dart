@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:myapp/src/blocs/event_bloc.dart';
 import 'package:myapp/src/ui/widgets/home_slide_item.dart';
 
@@ -13,12 +12,10 @@ class _HeaderSliderState extends State<HeaderSlider> {
   EventBloc eventBloc = new EventBloc();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     init();
   }
 
-  @override
   void init() async {
     print('object');
     var event = await eventBloc.getEventsList();
