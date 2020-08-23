@@ -18,17 +18,18 @@ class _FeedScreenState extends State<FeedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        onPressed: () => EventsBloc().getEventsList(),
         // onPressed: () {
         //   Navigator.push(
         //       context,
         //       MaterialPageRoute(
         //           builder: (BuildContext context) => FormEvent()));
         // },
-        onPressed: () => EventsBloc().createEventBloc(Event(
-            title: 'Testing',
-            description: 'Description',
-            date: '8/22/2020',
-            location: 'Localization')),
+        // onPressed: () => EventsBloc().createEventBloc(Event(
+        //     title: 'Testing',
+        //     description: 'Description',
+        //     date: '8/22/2020',
+        //     location: 'Localization')),
         child: Icon(Icons.add, color: kBackgroudAltColor),
         backgroundColor: kPrimaryColor,
       ),

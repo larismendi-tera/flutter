@@ -60,12 +60,6 @@ class FireStoreProvider {
     });
   }
 
-  final CollectionReference _eventsCollectionReference =
-      Firestore.instance.collection('events');
-
-  final StreamController<List<Event>> _eventsController =
-      StreamController<List<Event>>.broadcast();
-
   Future<void> createEvent(Event event) async {
     try {
       var user = await FirebaseAuth.instance.currentUser();
@@ -89,16 +83,24 @@ class FireStoreProvider {
     }
   }
 
+  final CollectionReference _eventsCollectionReference =
+      _firestore.collection('events');
+
+  final StreamController<List<Event>> _eventsController =
+      StreamController<List<Event>>.broadcast();
+
   Future getEventsOnceOff() async {
     try {
       var eventDocumentSnapshot =
           await _eventsCollectionReference.getDocuments();
       if (eventDocumentSnapshot.documents.isNotEmpty) {
-        return eventDocumentSnapshot.documents
+        events = eventDocumentSnapshot.documents
             .map(
                 (snapshot) => Event.fromMap(snapshot.data, snapshot.documentID))
             .where((mappedItem) => mappedItem.title != null)
             .toList();
+        log(events);
+        return events;
       }
     } catch (e) {
       if (e is PlatformException) {
