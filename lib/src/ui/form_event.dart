@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:myapp/src/models/event.dart';
+import 'package:myapp/src/blocs/event_bloc.dart';
 import 'package:myapp/constants.dart';
 import 'package:myapp/src/ui/widgets/button_purple.dart';
 import 'package:myapp/src/ui/widgets/text_input.dart';
@@ -18,6 +20,21 @@ class FormEvent extends StatefulWidget {
 }
 
 class _FormEventState extends State<FormEvent> {
+  final title = TextEditingController();
+  final location = TextEditingController();
+  final date = TextEditingController();
+  final description = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    title.dispose();
+    location.dispose();
+    date.dispose();
+    description.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -41,12 +58,10 @@ class _FormEventState extends State<FormEvent> {
                   height: 1,
                   color: kPrimaryColor.withAlpha(150),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 TextInput(
                   label: "Titulo",
-                  controller: null,
+                  controller: title,
                   inputType: null,
                 ),
                 SizedBox(
@@ -54,7 +69,7 @@ class _FormEventState extends State<FormEvent> {
                 ),
                 TextInput(
                   label: "Lugar",
-                  controller: null,
+                  controller: location,
                   inputType: TextInputType.streetAddress,
                 ),
                 SizedBox(
@@ -62,7 +77,7 @@ class _FormEventState extends State<FormEvent> {
                 ),
                 TextInput(
                   label: "Fecha",
-                  controller: null,
+                  controller: date,
                   inputType: null,
                 ),
                 SizedBox(
@@ -70,11 +85,19 @@ class _FormEventState extends State<FormEvent> {
                 ),
                 TextInput(
                   label: "Descripción",
-                  controller: null,
+                  controller: description,
                   inputType: TextInputType.multiline,
                   maxLine: 5,
                 ),
-                ButtonPurple(onPress: () {}, title: "Guardar")
+                ButtonPurple(
+                    onPress: () {
+                      EventBloc().createEventBloc(Event(
+                          title: title.text,
+                          description: description.text,
+                          date: date.text,
+                          location: location.text));
+                    },
+                    title: "Guardar")
               ],
             ),
           ),
