@@ -6,17 +6,25 @@ import '../detail_screen.dart';
 class HomeSlideItem extends StatelessWidget {
   HomeSlideItem({
     Key key,
+    this.data,
     this.image,
     this.title,
     this.autor,
     this.likes,
     this.days,
+    this.uid,
+    this.description,
+    this.imageProfile,
   });
+  final String uid;
+  final Object data;
   final String image;
   final String title;
   final String autor;
+  final String description;
+  final String imageProfile;
   final int likes;
-  final int days;
+  final String days;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,7 +35,17 @@ class HomeSlideItem extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => DetailScreen()));
+                    builder: (BuildContext context) => DetailScreen(
+                          uid: uid,
+                          data: data,
+                          image: image,
+                          title: title,
+                          autor: autor,
+                          likes: likes,
+                          days: days,
+                          description: description,
+                          imageProfile: imageProfile,
+                        )));
           },
           child: Container(
             margin: EdgeInsets.only(right: 10, bottom: kDefaultPadding * 1.5),
@@ -37,7 +55,7 @@ class HomeSlideItem extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
-                image: AssetImage(image),
+                image: NetworkImage(image),
                 fit: BoxFit.cover,
               ),
             ),

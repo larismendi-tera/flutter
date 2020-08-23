@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:myapp/src/blocs/event_bloc.dart';
 import 'package:myapp/src/ui/widgets/home_slide_item.dart';
@@ -22,13 +24,18 @@ class _HeaderSliderState extends State<HeaderSlider> {
     setState(() {
       if (event != null) {
         event.forEach((element) {
+          print(jsonDecode(element.creator));
           events.add(HomeSlideItem(
-              image: "assets/images/oficina.jpg",
+              uid: jsonDecode(element.creator)["uid"],
+              data: element,
+              image: element.photoUrl,
               title: element.title,
-              autor: "element.creator",
+              description: element.description,
+              autor: jsonDecode(element.creator)["displayName"],
+              imageProfile: jsonDecode(element.creator)["photoUrl"],
               likes: 10,
-              days: 5));
-          print(element.title);
+              days: element.date));
+          //print(jsonDecode(element.creator));
         });
       }
     });

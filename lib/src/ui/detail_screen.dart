@@ -4,6 +4,26 @@ import 'package:myapp/src/ui/comments_screen.dart';
 import 'package:myapp/src/ui/widgets/button_purple.dart';
 
 class DetailScreen extends StatelessWidget {
+  DetailScreen(
+      {Key key,
+      this.data,
+      this.uid,
+      this.image,
+      this.title,
+      this.autor,
+      this.likes,
+      this.days,
+      this.description,
+      this.imageProfile});
+  final Object data;
+  final String uid;
+  final String image;
+  final String title;
+  final String autor;
+  final String description;
+  final String imageProfile;
+  final int likes;
+  final String days;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -34,8 +54,7 @@ class DetailScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: kPrimaryColor,
                         image: DecorationImage(
-                            image: AssetImage("assets/images/oficina.jpg"),
-                            fit: BoxFit.cover)),
+                            image: NetworkImage(image), fit: BoxFit.cover)),
                   )
                 ],
               ),
@@ -54,7 +73,7 @@ class DetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Title',
+                            title,
                             style: TextStyle(
                                 color: kBackgroudColor,
                                 fontSize: 20,
@@ -62,7 +81,7 @@ class DetailScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            'Nombre persona',
+                            autor,
                             style: TextStyle(
                                 color: kBackgroudColor,
                                 fontSize: 20,
@@ -94,7 +113,7 @@ class DetailScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    dummyText,
+                    description,
                     style: TextStyle(
                         fontStyle: FontStyle.italic,
                         color: kBackgroudColor,
@@ -107,15 +126,14 @@ class DetailScreen extends StatelessWidget {
                       CircleAvatar(
                         radius: 30,
                         backgroundColor: kPrimaryColor,
-                        backgroundImage:
-                            AssetImage("assets/images/persona1.jpg"),
+                        backgroundImage: NetworkImage(imageProfile),
                       ),
                       SizedBox(width: 20),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Nombre persona',
+                            autor,
                             style: TextStyle(
                                 color: kBackgroudColor,
                                 fontSize: 20,

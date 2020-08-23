@@ -30,16 +30,19 @@ class EventBloc extends BaseBloc {
     return event;
   }
 
-  void listenToEventsRealTime() async {
+  listenToEventsRealTime() async {
     setLoading(true);
-    _provider.listenToEventsRealTime().then((events) {
+    var events = await _provider.listenToEventsRealTime();
+    /*.then((events) {
       setLoading(false);
       _events = events;
     }).catchError((err) {
       setLoading(false);
       _uiActions.sink.add(new UiAction(
           action: ACTIONS.showToast.index, message: err.toString()));
-    });
+    });*/
+    _events = events;
+    return events;
   }
 
   void deleteEvent(String documentId) async {
