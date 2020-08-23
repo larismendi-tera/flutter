@@ -21,6 +21,26 @@ class FireStoreProvider {
     }
   }
 
+  Future getUserList() async {
+    try {
+      var eventDocumentSnapshot =
+          await _eventsCollectionReference.getDocuments();
+      if (eventDocumentSnapshot.documents.isNotEmpty) {
+        var users = eventDocumentSnapshot.documents
+            .map((snapshot) => User.fromMap(snapshot.data, snapshot.documentID))
+            .where((mappedItem) => mappedItem.fullName != null)
+            .toList();
+        return users;
+      }
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
+
   Future<void> registerUser(User user) async {
     _firestore.collection('users').document(user.id).setData({
       'id': user.id,

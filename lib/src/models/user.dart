@@ -42,4 +42,18 @@ class User {
       'updatedAt': updatedAt
     };
   }
+
+  static User fromMap(Map<String, dynamic> map, String documentId) {
+    if (map == null) return null;
+
+    return User(
+        id: map['id'],
+        fullName: map['fullName'],
+        email: map['email'],
+        avatar: map['avatar'],
+        birthday: map['birthday'],
+        aboutMe: map['aboutMe'],
+        createdAt: map['createdAt'],
+        updatedAt: map['updatedAt']);
+  }
 }
