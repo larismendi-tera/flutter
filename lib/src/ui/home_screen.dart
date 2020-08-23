@@ -35,9 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         DetailScreen()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          onTap: () {
-            UserBloc().signOutBloc();
-          },
+          onTap: () => UserBloc().signOutBloc(),
           name: "LogOut",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
