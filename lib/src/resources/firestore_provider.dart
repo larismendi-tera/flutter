@@ -15,7 +15,7 @@ import 'package:myapp/src/services/cloud_storage_service.dart';
 class FireStoreProvider {
   Firestore _firestore = Firestore.instance;
 
-  final CollectionReference _eventsCollectionReference =
+  final Query _eventsCollectionReference =
       Firestore.instance.collection('events');
 
   final CollectionReference _commentsCollectionReference =
@@ -177,12 +177,14 @@ class FireStoreProvider {
   }
 
   Future deleteEvent(String documentId) async {
-    await _eventsCollectionReference.document(documentId).delete();
+    await _firestore.collection('events').document(documentId).delete();
+    // await _eventsCollectionReference.document(documentId).delete();
   }
 
   Future updateEvent(Event event) async {
     try {
-      await _eventsCollectionReference
+      await _firestore
+          .collection('events')
           .document(event.documentId)
           .updateData(event.toMap());
     } catch (e) {
@@ -261,7 +263,8 @@ class FireStoreProvider {
 
   Future updateComment(Comment comment) async {
     try {
-      await _eventsCollectionReference
+      await _firestore
+          .collection('comments')
           .document(comment.documentId)
           .updateData(comment.toMap());
     } catch (e) {
