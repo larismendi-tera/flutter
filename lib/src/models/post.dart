@@ -1,25 +1,25 @@
 import 'package:flutter/foundation.dart';
 
-class EventImage {
+class Post {
   final String documentId;
-  final String eventId;
-  final String photoUrl;
+  final String postType;
+  final String body;
   final String creator;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  EventImage(
+  Post(
       {this.documentId,
-      @required this.eventId,
-      @required this.photoUrl,
+      @required this.postType,
+      @required this.body,
       this.creator,
       this.createdAt,
       this.updatedAt});
 
   Map<String, dynamic> toMap() {
     var createDoc = <String, Object>{};
-    if (eventId != null) createDoc['eventId'] = eventId;
-    if (photoUrl != null) createDoc['photoUrl'] = photoUrl;
+    if (postType != null) createDoc['postType'] = postType;
+    if (body != null) createDoc['body'] = body;
     if (creator != null) createDoc['creator'] = creator;
     if (createdAt != null) createDoc['createdAt'] = createdAt;
     if (updatedAt != null) createDoc['updatedAt'] = updatedAt;
@@ -27,21 +27,15 @@ class EventImage {
     return createDoc;
   }
 
-  static EventImage fromMap(Map<String, dynamic> map, String documentId) {
+  static Post fromMap(Map<String, dynamic> map, String documentId) {
     if (map == null) return null;
 
-    return EventImage(
+    return Post(
         documentId: map['documentId'],
-        eventId: map['eventId'],
-        photoUrl: map['photoUrl'],
+        postType: map['postType'],
+        body: map['body'],
         creator: map['creator'],
         createdAt: map['createdAt'],
         updatedAt: map['updatedAt']);
-  }
-
-  factory EventImage.fromJson(dynamic json) {
-    return EventImage(
-        eventId: json['eventId'] as String,
-        photoUrl: json['photoUrl'] as String);
   }
 }
