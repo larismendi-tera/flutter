@@ -6,6 +6,8 @@ import 'package:myapp/src/blocs/user_bloc.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:myapp/src/ui/form_event.dart';
 
+import 'event_list.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -35,6 +37,14 @@ class _HomeScreenState extends State<HomeScreen> {
         DetailScreen()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
+          name: "Crear Evento",
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
+          colorLineSelected: kPrimaryColor,
+        ),
+        FormEvent()));
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
           onTap: () => UserBloc().signOutBloc(),
           name: "LogOut",
           baseStyle:
@@ -42,14 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
           colorLineSelected: kPrimaryColor,
         ),
         null));
-    items.add(new ScreenHiddenDrawer(
-        new ItemHiddenMenu(
-          name: "Crear Evento",
-          baseStyle:
-              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
-          colorLineSelected: kPrimaryColor,
-        ),
-        FormEvent()));
 
     super.initState();
   }
