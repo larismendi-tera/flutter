@@ -1,14 +1,23 @@
 import 'dart:developer';
+import 'dart:convert';
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import 'package:myapp/src/utils/image_selector.dart';
 import 'package:myapp/src/models/event.dart';
+import 'package:myapp/src/models/event_image.dart';
 import 'package:myapp/src/models/user.dart';
+import 'package:myapp/src/services/cloud_storage_service.dart';
+// import 'package:image_picker/image_picker.dart';
+
+import 'package:myapp/locator.dart';
 
 class FireStoreProvider {
   Firestore _firestore = Firestore.instance;
+  final ImageSelector _imageSelector = locator<ImageSelector>();
 
   final CollectionReference _eventsCollectionReference =
       Firestore.instance.collection('events');
@@ -86,6 +95,16 @@ class FireStoreProvider {
     });
   }
 
+  File _selectedImage;
+
+  Future selectImage() async {
+    var tempImage = await _imageSelector.selectImage();
+    if (tempImage != null) {
+      _selectedImage = File(tempImage.path);
+      // notifyListeners();
+    }
+  }
+
   Future<void> createEvent(Event event) async {
     try {
       var user = await FirebaseAuth.instance.currentUser();
@@ -99,6 +118,16 @@ class FireStoreProvider {
         }).then((value) {
           print(value.documentID);
         });
+        // TODO: aca se debe traer todos los images del evento para luego act ev
+        if (event.eventImages != null) {
+          var imgObjsJson = jsonDecode(event.eventImages) as List;
+          List<EventImage> imgObjs = imgObjsJson
+              // .map((imgJson) => EventImage.fromJson(imgJson))
+              .toList();
+          imgObjs.forEach((element) {
+            CloudStorageService().uploadImage(imageToUpload: _selectedImage);
+          });
+        }
       }
     } catch (e) {
       if (e is PlatformException) {
