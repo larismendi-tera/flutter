@@ -24,15 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
           colorLineSelected: kPrimaryColor,
         ),
         FeedScreen()));
-
-    items.add(new ScreenHiddenDrawer(
-        new ItemHiddenMenu(
-          name: "Detail",
-          baseStyle:
-              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
-          colorLineSelected: kPrimaryColor,
-        ),
-        DetailScreen()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Crear Evento",
@@ -82,39 +73,5 @@ class _HomeScreenState extends State<HomeScreen> {
           image: ExactAssetImage('assets/images/logoTeraton.png'),
           fit: BoxFit.scaleDown),
     );
-    //Size size = MediaQuery.of(context).size;
-    /*return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          children: [
-            SectionTitle(title: "Proximos Eventos", buttonText: "ver mas"),
-            HeaderSlider(),
-            SectionTitle(title: "Proximos Cumpleaños", buttonText: "ver mas"),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  CardPeople(
-                      image: "assets/images/persona1.jpg",
-                      name: "karen",
-                      date: "Sep 7"),
-                  CardPeople(
-                      image: "assets/images/persona2.jpg",
-                      name: "Chu-li",
-                      date: "Oct 10"),
-                  CardPeople(
-                      image: "assets/images/persona3.jpg",
-                      name: "Kate",
-                      date: "Nov 15"),
-                ],
-              ),
-            ),
-            SectionTitle(title: "Feed", buttonText: ""),
-            FeedContent(),
-            FeedContent(),
-          ],
-        ),
-      ),
-    );*/
   }
 }

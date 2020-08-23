@@ -27,12 +27,15 @@ class UserBloc implements Bloc {
     fireAuthProvider.signOut();
   }
 
-  void getUsersList() async {
-    _provider.getUserList().then((users) {
+  getUsersList() async {
+    var users = await _provider.getUserList();
+    _users = users;
+    return users;
+    /*.then((users) {
       _users = users;
     }).catchError((err) {
       print(err.toString());
-    });
+    });*/
   }
 
   @override
