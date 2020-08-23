@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/constants.dart';
 
+import '../detail_screen.dart';
+
 class HomeSlideItem extends StatelessWidget {
   HomeSlideItem({
     Key,
@@ -21,16 +23,24 @@ class HomeSlideItem extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        Container(
-          margin: EdgeInsets.only(right: 10, bottom: kDefaultPadding * 1.5),
-          width: size.width,
-          height: size.height * 0.3,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              image: AssetImage(image),
-              fit: BoxFit.cover,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => DetailScreen()));
+          },
+          child: Container(
+            margin: EdgeInsets.only(right: 10, bottom: kDefaultPadding * 1.5),
+            width: size.width,
+            height: size.height * 0.3,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: AssetImage(image),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
