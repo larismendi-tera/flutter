@@ -61,7 +61,7 @@ class _FormEventState extends State<FormEvent> {
                   height: 10,
                 ),
                 TextInput(
-                  label: "fecha",
+                  label: "Fecha",
                   controller: null,
                   inputType: null,
                 ),
@@ -69,7 +69,7 @@ class _FormEventState extends State<FormEvent> {
                   height: 10,
                 ),
                 TextInput(
-                  label: "descripcion",
+                  label: "Descripción",
                   controller: null,
                   inputType: TextInputType.multiline,
                   maxLine: 5,
