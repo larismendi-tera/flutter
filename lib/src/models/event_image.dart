@@ -38,4 +38,10 @@ class EventImage {
         createdAt: map['createdAt'],
         updatedAt: map['updatedAt']);
   }
+
+  factory EventImage.fromJson(dynamic json) {
+    return EventImage(
+        eventId: json['eventId'] as String,
+        photoUrl: json['photoUrl'] as String);
+  }
 }

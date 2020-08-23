@@ -1,13 +1,18 @@
 import 'package:get_it/get_it.dart';
-// import 'package:myapp/src/services/auth_service.dart';
-// import 'package:myapp/src/services/auth_implementation_service.dart';
-// import 'package:myapp/src/services/repository_service.dart';
-import 'package:myapp/src/services/repository_implementation_service.dart';
+// import 'package:myapp/src/services/authentication_service.dart';
+// import 'package:myapp/src/services/firestore_service.dart';
+// import 'package:myapp/src/services/navigation_service.dart';
+// import 'package:myapp/src/services/dialog_service.dart';
+import 'package:myapp/src/services/cloud_storage_service.dart';
+import 'package:myapp/src/utils/image_selector.dart';
 
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
-  // locator.registerFactory(() => RepositoryService());
-  locator.registerLazySingleton(() => RepositoryImplementationService());
-  // locator.registerSingleton<AuthService>(new AuthImplementationService());
+  // locator.registerLazySingleton(() => NavigationService());
+  // locator.registerLazySingleton(() => DialogService());
+  // locator.registerLazySingleton(() => AuthenticationService());
+  // locator.registerLazySingleton(() => FirestoreService());
+  locator.registerLazySingleton(() => CloudStorageService());
+  locator.registerLazySingleton(() => ImageSelector());
 }

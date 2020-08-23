@@ -43,6 +43,7 @@ dependencies:
   stacked: ^1.6.0
   stacked_services: ^0.4.3
   shared_preferences: ^0.5.10
+  image_picker:
 
   #image_picker
   image_picker: ^0.6.7+6

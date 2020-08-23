@@ -10,4 +10,11 @@ class FireStorageProvider {
     StorageUploadTask uploadTask = reference.putFile(image);
     return uploadTask.onComplete;
   }
+
+  Future<StorageTaskSnapshot> uploadImageEvent(
+      String imageEventId, File image) {
+    StorageReference reference = _fireStorage.ref().child(imageEventId);
+    StorageUploadTask uploadTask = reference.putFile(image);
+    return uploadTask.onComplete;
+  }
 }
