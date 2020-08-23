@@ -25,7 +25,7 @@ class EventBloc extends BaseBloc {
 
   getEventsList() async {
     setLoading(true);
-    var event = await _provider.getEventsOnceOff();
+    var event = await _provider.getEventsUpcoming();
     _events = events;
     return event;
   }
@@ -33,14 +33,6 @@ class EventBloc extends BaseBloc {
   listenToEventsRealTime() async {
     setLoading(true);
     var events = await _provider.listenToEventsRealTime();
-    /*.then((events) {
-      setLoading(false);
-      _events = events;
-    }).catchError((err) {
-      setLoading(false);
-      _uiActions.sink.add(new UiAction(
-          action: ACTIONS.showToast.index, message: err.toString()));
-    });*/
     _events = events;
     return events;
   }

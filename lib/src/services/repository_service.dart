@@ -21,7 +21,7 @@ abstract class RepositoryService {
 
   // Future<Event> createEventRepository(Event event);
 
-  Future<void> getEventsOnceOff();
+  Future<void> getEventsUpcoming();
 
   Future listenToEventsRealTime();
 

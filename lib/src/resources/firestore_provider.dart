@@ -137,10 +137,12 @@ class FireStoreProvider {
     }
   }
 
-  Future getEventsOnceOff() async {
+  Future getEventsUpcoming() async {
     try {
-      var eventDocumentSnapshot =
-          await _eventsCollectionReference.getDocuments();
+      var eventDocumentSnapshot = await _eventsCollectionReference
+          .where('date', isGreaterThanOrEqualTo: new DateTime.now().toString())
+          .orderBy('date')
+          .getDocuments();
       if (eventDocumentSnapshot.documents.isNotEmpty) {
         var events = eventDocumentSnapshot.documents
             .map(

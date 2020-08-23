@@ -38,7 +38,7 @@ class RepositoryImplementationService implements RepositoryService {
   //   return _fireStoreProvider.createEvent(event);
   // }
 
-  Future<void> getEventsOnceOff() => _fireStoreProvider.getEventsOnceOff();
+  Future<void> getEventsUpcoming() => _fireStoreProvider.getEventsUpcoming();
 
   Future listenToEventsRealTime() =>
       _fireStoreProvider.listenToEventsRealTime();
