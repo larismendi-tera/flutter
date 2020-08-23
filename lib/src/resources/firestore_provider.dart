@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:async';
 import 'dart:io';
@@ -97,12 +98,25 @@ class FireStoreProvider {
           eventImage =
               await CloudStorageService().uploadImage(imageToUpload: image);
         }
+        print(user.uid);
+
+        Object userData = {
+          "email": user.email,
+          "displayName": user.displayName,
+          "providerId": user.providerId,
+          "uid": user.uid,
+          "photoUrl": user.photoUrl
+        };
+        /*var data2 = jsonEncode(userData);
+        print(data2);
+        print('decode');
+        print(jsonDecode(data2)["email"]);*/
         _firestore.collection('events').add({
           'title': event.title,
           'description': event.description,
           'date': event.date,
           'location': event.location,
-          'creator': user.toString(),
+          'creator': jsonEncode(userData),
           'photoUrl': eventImage != null ? eventImage.imageUrl : null
         }).then((value) {
           print(value.documentID);
