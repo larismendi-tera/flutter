@@ -46,10 +46,13 @@ class _FormEventState extends State<FormEvent> {
   }
 
   clearTextInput() {
-    title.clear();
-    location.clear();
-    date.clear();
-    description.clear();
+    setState(() {
+      _image = null;
+      title.clear();
+      location.clear();
+      date.clear();
+      description.clear();
+    });
   }
 
   @override
@@ -79,7 +82,6 @@ class _FormEventState extends State<FormEvent> {
                   height: size.width * .6,
                   decoration: BoxDecoration(
                       border: Border.all(color: kPrimaryColor),
-                      //color: kBackgroudAltColor,
                       borderRadius: BorderRadius.circular(10)),
                   child: Stack(
                     children: [

@@ -20,6 +20,7 @@ class EventBloc extends BaseBloc {
   Observable<UiAction> get actions => _uiActions.stream;
 
   Future<void> createEventBloc(Event event, File image) async {
+    print('createEventBloc');
     _provider.createEvent(event, image);
   }
 

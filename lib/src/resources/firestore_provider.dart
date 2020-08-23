@@ -93,7 +93,9 @@ class FireStoreProvider {
       var user = await FirebaseAuth.instance.currentUser();
       var eventImage;
       if (user != null) {
+        print('Usuario autenticado');
         if (image != null) {
+          print('trajo imagen');
           eventImage =
               await CloudStorageService().uploadImage(imageToUpload: image);
         }
