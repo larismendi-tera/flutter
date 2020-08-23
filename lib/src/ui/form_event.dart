@@ -66,6 +66,7 @@ class _FormEventState extends State<FormEvent> {
                   label: "Titulo",
                   controller: title,
                   inputType: null,
+                  maxLine: 1,
                 ),
                 SizedBox(
                   height: 10,
@@ -74,6 +75,7 @@ class _FormEventState extends State<FormEvent> {
                   label: "Lugar",
                   controller: location,
                   inputType: TextInputType.streetAddress,
+                  maxLine: 1,
                 ),
                 SizedBox(
                   height: 10,
@@ -82,6 +84,7 @@ class _FormEventState extends State<FormEvent> {
                   label: "Fecha",
                   controller: date,
                   inputType: null,
+                  maxLine: 1,
                 ),
                 SizedBox(
                   height: 10,
