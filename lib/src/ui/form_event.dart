@@ -10,7 +10,7 @@ lugar,
 fecha*/
 
 class FormEvent extends StatefulWidget {
-  File image;
+  final File image;
   FormEvent({Key key, this.image});
 
   @override
@@ -74,7 +74,7 @@ class _FormEventState extends State<FormEvent> {
                   inputType: TextInputType.multiline,
                   maxLine: 5,
                 ),
-                ButtonPurple(title: "Guardar")
+                ButtonPurple(onPress: () {}, title: "Guardar")
               ],
             ),
           ),

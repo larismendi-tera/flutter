@@ -8,10 +8,9 @@ class DetailScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     final String dummyText =
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis vulputate interdum. Fusce molestie urna id mi scelerisque bibendum in eget eros. Curabitur tincidunt consequat nisl quis mattis. Sed justo mi, euismod in luctus vel, ullamcorper in mauris. Aenean at mi sit amet quam pellentesque rutrum. Fusce euismod augue quam, scelerisque semper dolor vestibulum a. Sed egestas felis leo, a rhoncus ipsum cursus sit amet. Nulla interdum eu ligula at fermentum. Phasellus vehicula tincidunt purus non luctus.";
-    final String dummyText2 =
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis vulputate interdum.";
     return Scaffold(
         floatingActionButton: FloatingActionButton(
+          onPressed: () {},
           child: Icon(
             Icons.message,
             color: kBackgroudAltColor,

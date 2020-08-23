@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:myapp/src/blocs/base_bloc.dart';
 import 'package:myapp/src/models/event.dart';
 import 'package:myapp/src/resources/firestore_provider.dart';

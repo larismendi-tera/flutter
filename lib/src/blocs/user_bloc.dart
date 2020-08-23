@@ -18,7 +18,6 @@ class UserBloc implements Bloc {
   }
 
   Future<void> signOutBloc() async {
-    print('Entro');
     fireAuthProvider.signOut();
   }
 

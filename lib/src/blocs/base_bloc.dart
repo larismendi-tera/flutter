@@ -10,6 +10,7 @@ class BaseBloc extends ChangeNotifier {
     _loading.sink.add(loading);
   }
 
+  // ignore: must_call_super
   void dispose() async {
     await _loading.drain();
     _loading.close();

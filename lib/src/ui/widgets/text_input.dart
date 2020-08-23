@@ -5,7 +5,7 @@ class TextInput extends StatelessWidget {
   final String label;
   final TextInputType inputType;
   final TextEditingController controller;
-  int maxLine = 1;
+  final int maxLine;
 
   TextInput(
       {Key key,
