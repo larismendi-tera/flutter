@@ -32,7 +32,7 @@ class _FormEventState extends State<FormEvent> {
             child: Column(
               children: [
                 Text(
-                  "Agregar Evento:",
+                  "Agregar Evento",
                   style: TextStyle(color: kPrimaryColor),
                 ),
                 Container(
