@@ -85,10 +85,13 @@ class _FormEventState extends State<FormEvent> {
                     children: [
                       Container(
                         width: size.width * .8,
+                        height: size.width * .6,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10)),
                         child: _image == null
-                            ? Image.asset('assets/images/cine.jpg')
+                            ? Image.asset(
+                                'assets/images/plus.png',
+                              )
                             : Image.file(
                                 _image,
                                 fit: BoxFit.cover,

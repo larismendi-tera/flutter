@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/constants.dart';
+import 'package:myapp/src/ui/comments_screen.dart';
 
 class FeedContent extends StatelessWidget {
   @override
@@ -73,9 +74,18 @@ class FeedContent extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    Icon(
-                      Icons.comment,
-                      color: kPrimaryColor,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    CommentsScreen()));
+                      },
+                      child: Icon(
+                        Icons.comment,
+                        color: kPrimaryColor,
+                      ),
                     ),
                     SizedBox(width: 10),
                     Icon(

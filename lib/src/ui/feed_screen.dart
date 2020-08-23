@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/constants.dart';
-import 'package:myapp/src/blocs/user_bloc.dart';
-// import 'package:myapp/src/ui/form_event.dart';
+import 'package:myapp/src/ui/form_event.dart';
 import 'package:myapp/src/ui/widgets/card_people.dart';
 import 'package:myapp/src/ui/widgets/feed_content.dart';
 import 'package:myapp/src/ui/widgets/header_slider.dart';
@@ -17,13 +16,13 @@ class _FeedScreenState extends State<FeedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => UserBloc().getUsersList(),
-        // onPressed: () {
-        //   Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (BuildContext context) => FormEvent()));
-        // },
+        //onPressed: () => UserBloc().getUsersList(),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => FormEvent()));
+        },
         child: Icon(Icons.add, color: kBackgroudAltColor),
         backgroundColor: kPrimaryColor,
       ),

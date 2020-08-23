@@ -17,7 +17,7 @@ import 'package:myapp/locator.dart';
 
 class FireStoreProvider {
   Firestore _firestore = Firestore.instance;
-  final ImageSelector _imageSelector = locator<ImageSelector>();
+  final ImageSelector _imageSelector = ImageSelector();
 
   final CollectionReference _eventsCollectionReference =
       Firestore.instance.collection('events');
@@ -97,8 +97,9 @@ class FireStoreProvider {
 
   File _selectedImage;
 
-  Future selectImage() async {
-    var tempImage = await _imageSelector.selectImage();
+  Future selectImage(type) async {
+    var tempImage = null;
+    await _imageSelector.selectImage(type);
     if (tempImage != null) {
       _selectedImage = File(tempImage.path);
       // notifyListeners();
