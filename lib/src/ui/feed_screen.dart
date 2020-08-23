@@ -18,7 +18,13 @@ class _FeedScreenState extends State<FeedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => EventsBloc().getEventsList(),
+        onPressed: () => EventsBloc().updateEvent(Event(
+            documentId: '1',
+            title: 'Testing',
+            description: 'Si vino',
+            date: '8/22/2020',
+            location: 'Localization',
+            updatedAt: DateTime.now())),
         // onPressed: () {
         //   Navigator.push(
         //       context,

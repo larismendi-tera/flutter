@@ -84,7 +84,7 @@ class FireStoreProvider {
   }
 
   final CollectionReference _eventsCollectionReference =
-      _firestore.collection('events');
+      Firestore.instance.collection('events');
 
   final StreamController<List<Event>> _eventsController =
       StreamController<List<Event>>.broadcast();
@@ -94,12 +94,11 @@ class FireStoreProvider {
       var eventDocumentSnapshot =
           await _eventsCollectionReference.getDocuments();
       if (eventDocumentSnapshot.documents.isNotEmpty) {
-        events = eventDocumentSnapshot.documents
+        var events = eventDocumentSnapshot.documents
             .map(
                 (snapshot) => Event.fromMap(snapshot.data, snapshot.documentID))
             .where((mappedItem) => mappedItem.title != null)
             .toList();
-        log(events);
         return events;
       }
     } catch (e) {
@@ -111,7 +110,7 @@ class FireStoreProvider {
     }
   }
 
-  Stream listenToEventsRealTime() {
+  Future listenToEventsRealTime() async {
     // Register the handler for when the events data changes
     _eventsCollectionReference.snapshots().listen((eventsSnapshot) {
       if (eventsSnapshot.documents.isNotEmpty) {

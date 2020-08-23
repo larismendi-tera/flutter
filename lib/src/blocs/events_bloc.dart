@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:myapp/src/blocs/base_bloc.dart';
 import 'package:myapp/src/models/event.dart';
 import 'package:myapp/src/resources/firestore_provider.dart';
@@ -35,14 +36,14 @@ class EventsBloc extends BaseBloc {
 
   void listenToEventsRealTime() async {
     setLoading(true);
-    // _provider.listenToEventsRealTime().then((events) {
-    //   setLoading(false);
-    //   _events = events;
-    // }).catchError((err) {
-    //   setLoading(false);
-    //   _uiActions.sink.add(new UiAction(
-    //       action: ACTIONS.showToast.index, message: err.toString()));
-    // });
+    _provider.listenToEventsRealTime().then((events) {
+      setLoading(false);
+      _events = events;
+    }).catchError((err) {
+      setLoading(false);
+      _uiActions.sink.add(new UiAction(
+          action: ACTIONS.showToast.index, message: err.toString()));
+    });
   }
 
   void deleteEvent(String documentId) async {
