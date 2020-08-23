@@ -84,7 +84,7 @@ class FireStoreProvider {
       'avatar': user.avatar,
       'birthday': user.birthday,
       'aboutMe': user.aboutMe,
-      'updatedAt': user.updatedAt
+      'updatedAt': Timestamp.now()
     }).then((_) {
       return getUser(user.id);
     });
@@ -105,7 +105,8 @@ class FireStoreProvider {
           'date': event.date,
           'location': event.location,
           'creator': user.toString(),
-          'photoUrl': eventImage != null ? eventImage.imageUrl : null
+          'photoUrl': eventImage != null ? eventImage.imageUrl : null,
+          'createdAt': Timestamp.now()
         }).then((value) {
           print(value.documentID);
         });
