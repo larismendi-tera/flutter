@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:myapp/src/blocs/events_bloc.dart';
+import 'package:myapp/src/blocs/event_bloc.dart';
 
 class EventList extends StatelessWidget {
   const EventList({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<EventsBloc>.reactive(
-        viewModelBuilder: () => EventsBloc(),
+    return ViewModelBuilder<EventBloc>.reactive(
+        viewModelBuilder: () => EventBloc(),
         onModelReady: (model) => model.getEventsList(),
         builder: (context, model, child) => Scaffold(
               backgroundColor: Colors.white,

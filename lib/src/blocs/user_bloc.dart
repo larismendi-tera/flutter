@@ -9,6 +9,7 @@ class UserBloc implements Bloc {
   final fireAuthProvider = FireAuthProvider();
   List<User> _users;
   List<User> get users => _users;
+
   //Flujo de datos -streams
   //Stream - firebase
   //StreamController
@@ -27,7 +28,7 @@ class UserBloc implements Bloc {
   }
 
   void getUsersList() async {
-    _provider.getUserList().then((events) {
+    _provider.getUserList().then((users) {
       _users = users;
     }).catchError((err) {
       print(err.toString());

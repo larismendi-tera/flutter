@@ -9,7 +9,7 @@ enum ACTIONS {
   error,
 }
 
-class EventsBloc extends BaseBloc {
+class EventBloc extends BaseBloc {
   var _provider = FireStoreProvider();
   final _uiActions = BehaviorSubject<UiAction>();
   List<Event> _events;

@@ -10,6 +10,12 @@ import 'package:myapp/src/models/user.dart';
 class FireStoreProvider {
   Firestore _firestore = Firestore.instance;
 
+  final CollectionReference _eventsCollectionReference =
+      Firestore.instance.collection('events');
+
+  final StreamController<List<Event>> _eventsController =
+      StreamController<List<Event>>.broadcast();
+
   Future<int> authenticateUser() async {
     final QuerySnapshot result =
         await _firestore.collection("users").getDocuments();
@@ -24,7 +30,7 @@ class FireStoreProvider {
   Future getUserList() async {
     try {
       var eventDocumentSnapshot =
-          await _eventsCollectionReference.getDocuments();
+          await _firestore.collection("users").getDocuments();
       if (eventDocumentSnapshot.documents.isNotEmpty) {
         var users = eventDocumentSnapshot.documents
             .map((snapshot) => User.fromMap(snapshot.data, snapshot.documentID))
@@ -102,12 +108,6 @@ class FireStoreProvider {
       log(e.toString());
     }
   }
-
-  final CollectionReference _eventsCollectionReference =
-      Firestore.instance.collection('events');
-
-  final StreamController<List<Event>> _eventsController =
-      StreamController<List<Event>>.broadcast();
 
   Future getEventsOnceOff() async {
     try {
