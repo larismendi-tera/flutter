@@ -11,5 +11,5 @@ class FireAuthProvider {
 
   Future<FirebaseUser> singInFirebase() => _firebaseAuthApi.signIn();
 
-  signOut() => _firebaseAuthApi.signOut();
+  void signOut() => _firebaseAuthApi.signOut();
 }

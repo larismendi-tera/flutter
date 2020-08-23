@@ -17,7 +17,8 @@ class UserBloc implements Bloc {
     return fireAuthProvider.singInFirebase();
   }
 
-  signOut() {
+  Future<void> signOutBloc() async {
+    print('Entro');
     fireAuthProvider.signOut();
   }
 
