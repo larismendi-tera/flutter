@@ -19,7 +19,7 @@ abstract class RepositoryService {
 
   Future<User> updateUser(User user);
 
-  Future<void> createEvent(Event event);
+  Future<Event> createEventRepository(Event event);
 
   Future<void> getEventsOnceOff();
 

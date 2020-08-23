@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:async';
 // import 'dart:io';
 
@@ -33,8 +34,10 @@ class RepositoryImplementationService implements RepositoryService {
     return _fireStoreProvider.updateUser(user);
   }
 
-  Future<void> createEvent(Event event) =>
-      _fireStoreProvider.createEvent(event);
+  Future<Event> createEventRepository(Event event) {
+    log('please');
+    return _fireStoreProvider.createEvent(event);
+  }
 
   Future<void> getEventsOnceOff() => _fireStoreProvider.getEventsOnceOff();
 

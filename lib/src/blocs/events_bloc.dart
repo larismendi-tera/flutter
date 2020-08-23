@@ -1,8 +1,14 @@
+import 'dart:developer';
+
 import 'package:myapp/src/blocs/base_bloc.dart';
 import 'package:myapp/src/models/event.dart';
-import 'package:myapp/src/services/repository_service.dart';
+import 'package:myapp/src/resources/firestore_provider.dart';
+// import 'package:myapp/src/services/repository_service.dart';
+import 'package:myapp/src/services/repository_implementation_service.dart';
 import 'package:myapp/src/ui/helpers/UiAction.dart';
 import 'package:rxdart/rxdart.dart';
+
+// import 'package:myapp/locator.dart';
 
 enum ACTIONS {
   showToast,
@@ -15,11 +21,30 @@ class EventsBloc extends BaseBloc {
   List<Event> _events;
   List<Event> get events => _events;
 
-  EventsBloc([RepositoryService repoService]) {
+  EventsBloc([RepositoryImplementationService repoService]) {
+    log('????');
     _repository = repoService;
   }
 
   Observable<UiAction> get actions => _uiActions.stream;
+
+  Future<void> createEventBloc(Event event) async {
+    log('Viva');
+    FireStoreProvider().createEvent(event);
+    // setLoading(true);
+    // _repository.createEventRepository(event).then((event) {
+    //   log('Loco si tienes razon');
+    //   setLoading(false);
+    //   _uiActions.sink.add(new UiAction(
+    //       action: ACTIONS.showToast.index, message: 'Update success'));
+    // }).catchError((err) {
+    //   log('Loco tienes razon');
+    //   setLoading(false);
+    //   _uiActions.sink.add(new UiAction(
+    //       action: ACTIONS.showToast.index, message: err.toString()));
+    // });
+    // return event;
+  }
 
   void getEventsList() async {
     setLoading(true);
