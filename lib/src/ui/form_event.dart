@@ -6,16 +6,30 @@ import 'package:myapp/src/blocs/event_bloc.dart';
 import 'package:myapp/constants.dart';
 import 'package:myapp/src/ui/widgets/button_purple.dart';
 import 'package:myapp/src/ui/widgets/text_input.dart';
+import 'package:image_picker/image_picker.dart';
 
 class FormEvent extends StatefulWidget {
-  final File image;
-  FormEvent({Key key, this.image});
-
   @override
   _FormEventState createState() => _FormEventState();
 }
 
 class _FormEventState extends State<FormEvent> {
+  File _image;
+  final picker = ImagePicker();
+  List<ImageSource> imageSourceList = [ImageSource.gallery, ImageSource.camera];
+  //FormEvent({Key key});
+
+  Future getImage(int type) async {
+    final pickedFile = await picker.getImage(source: imageSourceList[type]);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+        print(_image);
+      }
+    });
+  }
+
   final title = TextEditingController();
   final location = TextEditingController();
   final date = TextEditingController();
@@ -65,21 +79,72 @@ class _FormEventState extends State<FormEvent> {
                   height: size.width * .6,
                   decoration: BoxDecoration(
                       border: Border.all(color: kPrimaryColor),
-                      color: kBackgroudAltColor,
+                      //color: kBackgroudAltColor,
                       borderRadius: BorderRadius.circular(10)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  child: Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(kDefaultPadding * .3),
-                        width: size.width * .3,
+                        width: size.width * .8,
                         decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10))),
-                        child: Text("Agregar Imagen"),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: _image == null
+                            ? Image.asset('assets/images/cine.jpg')
+                            : Image.file(
+                                _image,
+                                fit: BoxFit.cover,
+                              ),
+                      ),
+                      Container(
+                        width: size.width * .8,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            GestureDetector(
+                              key: null,
+                              onTap: () => getImage(1),
+                              child: Container(
+                                alignment: Alignment.centerRight,
+                                padding: EdgeInsets.all(kDefaultPadding * .3),
+                                width: size.width * .3,
+                                decoration: BoxDecoration(
+                                  color: kPrimaryColor,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10)),
+                                ),
+                                child: Text("Camara"),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: size.width * .8,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            GestureDetector(
+                              key: null,
+                              onTap: () => getImage(0),
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                padding: EdgeInsets.all(kDefaultPadding * .3),
+                                width: size.width * .3,
+                                decoration: BoxDecoration(
+                                  color: kPrimaryColor,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10)),
+                                ),
+                                child: Text("Galeria"),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
