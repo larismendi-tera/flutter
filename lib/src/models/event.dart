@@ -25,18 +25,18 @@ class Event {
       this.updatedAt});
 
   Map<String, dynamic> toMap() {
-    return {
-      'documentId': documentId,
-      'title': title,
-      'description': description,
-      'date': date,
-      'location': location,
-      'creator': creator,
-      'organizer': organizer,
-      'inventory': inventory,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt
-    };
+    var createDoc = <String, Object>{};
+    if (title != null) createDoc['title'] = title;
+    if (description != null) createDoc['description'] = description;
+    if (date != null) createDoc['date'] = date;
+    if (location != null) createDoc['location'] = location;
+    if (creator != null) createDoc['creator'] = creator;
+    if (organizer != null) createDoc['organizer'] = organizer;
+    if (inventory != null) createDoc['inventory'] = inventory;
+    if (createdAt != null) createDoc['createdAt'] = createdAt;
+    if (updatedAt != null) createDoc['updatedAt'] = updatedAt;
+
+    return createDoc;
   }
 
   static Event fromMap(Map<String, dynamic> map, String documentId) {

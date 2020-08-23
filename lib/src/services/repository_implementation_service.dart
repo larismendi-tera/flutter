@@ -22,7 +22,7 @@ class RepositoryImplementationService implements RepositoryService {
 
   Future<FirebaseUser> singInFirebase() => _fireAuthProvider.singInFirebase();
 
-  Future<void> signOut() => _fireAuthProvider.signOut();
+  void signOut() => _fireAuthProvider.signOut();
 
   Future<void> registerUser(User user) => _fireStoreProvider.registerUser(user);
 
@@ -41,7 +41,7 @@ class RepositoryImplementationService implements RepositoryService {
 
   Future<void> getEventsOnceOff() => _fireStoreProvider.getEventsOnceOff();
 
-  Stream listenToEventsRealTime() =>
+  Future listenToEventsRealTime() =>
       _fireStoreProvider.listenToEventsRealTime();
 
   Future<void> updateEvent(Event event) =>

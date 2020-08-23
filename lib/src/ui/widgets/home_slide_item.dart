@@ -5,19 +5,18 @@ import '../detail_screen.dart';
 
 class HomeSlideItem extends StatelessWidget {
   HomeSlideItem({
-    Key,
-    key,
+    Key key,
     this.image,
     this.title,
     this.autor,
     this.likes,
     this.days,
   });
-  String image;
-  String title;
-  String autor;
-  int likes;
-  int days;
+  final String image;
+  final String title;
+  final String autor;
+  final int likes;
+  final int days;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -78,7 +77,7 @@ class HomeSlideItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "Days: ${days}",
+                        "Days: $days",
                         style: TextStyle(color: kPrimaryColor),
                       ),
                       Spacer(),
@@ -91,7 +90,7 @@ class HomeSlideItem extends StatelessWidget {
                           ),
                           SizedBox(width: 10),
                           Text(
-                            "${likes}",
+                            "$likes",
                             style: TextStyle(
                                 color: kPrimaryColor,
                                 fontSize: 20,

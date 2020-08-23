@@ -103,7 +103,7 @@ class AuthImplementationService implements AuthService {
 
   Future<void> handleUserSignOut() async {
     final prefs = await SharedPreferences.getInstance();
-    await _repository.signOut();
+    _repository.signOut();
     var googleSignIn = GoogleSignIn();
     await googleSignIn.disconnect().catchError((_) => null);
     await googleSignIn.signOut().catchError((_) => null);

@@ -1,54 +1,29 @@
-import 'dart:developer';
-
 import 'package:myapp/src/blocs/base_bloc.dart';
 import 'package:myapp/src/models/event.dart';
 import 'package:myapp/src/resources/firestore_provider.dart';
-// import 'package:myapp/src/services/repository_service.dart';
-import 'package:myapp/src/services/repository_implementation_service.dart';
 import 'package:myapp/src/ui/helpers/UiAction.dart';
 import 'package:rxdart/rxdart.dart';
-
-// import 'package:myapp/locator.dart';
 
 enum ACTIONS {
   showToast,
   error,
 }
 
-class EventsBloc extends BaseBloc {
-  var _repository;
+class EventBloc extends BaseBloc {
+  var _provider = FireStoreProvider();
   final _uiActions = BehaviorSubject<UiAction>();
   List<Event> _events;
   List<Event> get events => _events;
 
-  EventsBloc([RepositoryImplementationService repoService]) {
-    log('????');
-    _repository = repoService;
-  }
-
   Observable<UiAction> get actions => _uiActions.stream;
 
   Future<void> createEventBloc(Event event) async {
-    log('Viva');
-    FireStoreProvider().createEvent(event);
-    // setLoading(true);
-    // _repository.createEventRepository(event).then((event) {
-    //   log('Loco si tienes razon');
-    //   setLoading(false);
-    //   _uiActions.sink.add(new UiAction(
-    //       action: ACTIONS.showToast.index, message: 'Update success'));
-    // }).catchError((err) {
-    //   log('Loco tienes razon');
-    //   setLoading(false);
-    //   _uiActions.sink.add(new UiAction(
-    //       action: ACTIONS.showToast.index, message: err.toString()));
-    // });
-    // return event;
+    _provider.createEvent(event);
   }
 
   void getEventsList() async {
     setLoading(true);
-    _repository.getEventsOnceOff().then((events) {
+    _provider.getEventsOnceOff().then((events) {
       setLoading(false);
       _events = events;
     }).catchError((err) {
@@ -60,7 +35,7 @@ class EventsBloc extends BaseBloc {
 
   void listenToEventsRealTime() async {
     setLoading(true);
-    _repository.listenToEventsRealTime().then((events) {
+    _provider.listenToEventsRealTime().then((events) {
       setLoading(false);
       _events = events;
     }).catchError((err) {
@@ -72,7 +47,7 @@ class EventsBloc extends BaseBloc {
 
   void deleteEvent(String documentId) async {
     setLoading(true);
-    _repository.deleteEvent(documentId).then((event) {
+    _provider.deleteEvent(documentId).then((event) {
       setLoading(false);
       _uiActions.sink.add(new UiAction(
           action: ACTIONS.showToast.index, message: 'Delete success'));
@@ -85,7 +60,7 @@ class EventsBloc extends BaseBloc {
 
   void updateEvent(Event event) async {
     setLoading(true);
-    _repository.updateEvent(event).then((event) {
+    _provider.updateEvent(event).then((event) {
       setLoading(false);
       _uiActions.sink.add(new UiAction(
           action: ACTIONS.showToast.index, message: 'Update success'));

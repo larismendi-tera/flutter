@@ -10,6 +10,12 @@ import 'package:myapp/src/models/user.dart';
 class FireStoreProvider {
   Firestore _firestore = Firestore.instance;
 
+  final CollectionReference _eventsCollectionReference =
+      Firestore.instance.collection('events');
+
+  final StreamController<List<Event>> _eventsController =
+      StreamController<List<Event>>.broadcast();
+
   Future<int> authenticateUser() async {
     final QuerySnapshot result =
         await _firestore.collection("users").getDocuments();
@@ -18,6 +24,26 @@ class FireStoreProvider {
       return 0;
     } else {
       return 1;
+    }
+  }
+
+  Future getUserList() async {
+    try {
+      var eventDocumentSnapshot =
+          await _firestore.collection("users").getDocuments();
+      if (eventDocumentSnapshot.documents.isNotEmpty) {
+        var users = eventDocumentSnapshot.documents
+            .map((snapshot) => User.fromMap(snapshot.data, snapshot.documentID))
+            .where((mappedItem) => mappedItem.fullName != null)
+            .toList();
+        return users;
+      }
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
     }
   }
 
@@ -60,16 +86,9 @@ class FireStoreProvider {
     });
   }
 
-  final CollectionReference _eventsCollectionReference =
-      Firestore.instance.collection('events');
-
-  final StreamController<List<Event>> _eventsController =
-      StreamController<List<Event>>.broadcast();
-
   Future<void> createEvent(Event event) async {
     try {
       var user = await FirebaseAuth.instance.currentUser();
-      //log('User: $user');
       if (user != null) {
         _firestore.collection('events').add({
           'title': event.title,
@@ -80,14 +99,6 @@ class FireStoreProvider {
         }).then((value) {
           print(value.documentID);
         });
-        // _firestore.collection('events').document(event.documentId).setData({
-        //   'id': event.documentId,
-        //   'title': event.title,
-        //   'description': event.description,
-        //   'date': event.date,
-        //   'location': event.location,
-        //   'creator': user
-        // });
       }
     } catch (e) {
       if (e is PlatformException) {
@@ -103,11 +114,12 @@ class FireStoreProvider {
       var eventDocumentSnapshot =
           await _eventsCollectionReference.getDocuments();
       if (eventDocumentSnapshot.documents.isNotEmpty) {
-        return eventDocumentSnapshot.documents
+        var events = eventDocumentSnapshot.documents
             .map(
                 (snapshot) => Event.fromMap(snapshot.data, snapshot.documentID))
             .where((mappedItem) => mappedItem.title != null)
             .toList();
+        return events;
       }
     } catch (e) {
       if (e is PlatformException) {
@@ -118,7 +130,7 @@ class FireStoreProvider {
     }
   }
 
-  Stream listenToEventsRealTime() {
+  Future listenToEventsRealTime() async {
     // Register the handler for when the events data changes
     _eventsCollectionReference.snapshots().listen((eventsSnapshot) {
       if (eventsSnapshot.documents.isNotEmpty) {

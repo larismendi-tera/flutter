@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:myapp/src/models/event.dart';
+import 'package:myapp/src/blocs/event_bloc.dart';
 import 'package:myapp/constants.dart';
 import 'package:myapp/src/ui/widgets/button_purple.dart';
 import 'package:myapp/src/ui/widgets/text_input.dart';
@@ -10,7 +12,7 @@ lugar,
 fecha*/
 
 class FormEvent extends StatefulWidget {
-  File image;
+  final File image;
   FormEvent({Key key, this.image});
 
   @override
@@ -18,25 +20,35 @@ class FormEvent extends StatefulWidget {
 }
 
 class _FormEventState extends State<FormEvent> {
+  final title = TextEditingController();
+  final location = TextEditingController();
+  final date = TextEditingController();
+  final description = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    title.dispose();
+    location.dispose();
+    date.dispose();
+    description.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _controllerTitleEvent = TextEditingController();
-    final _controllerLocationEvent = TextEditingController();
-    final _controllerDateEvent = TextEditingController();
-    final _controllerDescriptionEvent = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: ListView(
         children: [
           Container(
             width: size.width,
-            height: size.height,
             padding: EdgeInsets.all(kDefaultPadding),
             color: kBackgroudAltColor,
             child: Column(
               children: [
                 Text(
-                  "Agregar Evento:",
+                  "Agregar Evento",
                   style: TextStyle(color: kPrimaryColor),
                 ),
                 Container(
@@ -45,21 +57,42 @@ class _FormEventState extends State<FormEvent> {
                   height: 1,
                   color: kPrimaryColor.withAlpha(150),
                 ),
-                SizedBox(
-                  height: 10,
+                Container(
+                  width: size.width * .8,
+                  height: size.width * .6,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: kPrimaryColor),
+                      color: kBackgroudAltColor,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(kDefaultPadding * .3),
+                        width: size.width * .3,
+                        decoration: BoxDecoration(
+                            color: kPrimaryColor,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10))),
+                        child: Text("Agregar Imagen"),
+                      ),
+                    ],
+                  ),
                 ),
+                SizedBox(height: 10),
                 TextInput(
                   label: "Titulo",
-                  controller: _controllerTitleEvent,
-                  inputType: TextInputType.name,
-                  maxLine: 1,
+                  controller: title,
+                  inputType: null,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 TextInput(
                   label: "Lugar",
-                  controller: _controllerLocationEvent,
+                  controller: location,
                   inputType: TextInputType.streetAddress,
                   maxLine: 1,
                 ),
@@ -67,21 +100,28 @@ class _FormEventState extends State<FormEvent> {
                   height: 10,
                 ),
                 TextInput(
-                  label: "fecha",
-                  controller: _controllerDateEvent,
-                  inputType: TextInputType.datetime,
-                  maxLine: 1,
+                  label: "Fecha",
+                  controller: date,
+                  inputType: null,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 TextInput(
-                  label: "descripcion",
-                  controller: _controllerDescriptionEvent,
+                  label: "Descripción",
+                  controller: description,
                   inputType: TextInputType.multiline,
                   maxLine: 5,
                 ),
-                ButtonPurple(title: "Guardar")
+                ButtonPurple(
+                    onPress: () {
+                      EventBloc().createEventBloc(Event(
+                          title: title.text,
+                          description: description.text,
+                          date: date.text,
+                          location: location.text));
+                    },
+                    title: "Guardar")
               ],
             ),
           ),

@@ -1,9 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:myapp/src/resources/firestore_provider.dart';
 import 'package:myapp/src/resources/fireauth_provider.dart';
+import 'package:myapp/src/models/user.dart';
 
 class UserBloc implements Bloc {
+  var _provider = FireStoreProvider();
   final fireAuthProvider = FireAuthProvider();
+  List<User> _users;
+  List<User> get users => _users;
+
   //Flujo de datos -streams
   //Stream - firebase
   //StreamController
@@ -17,8 +23,16 @@ class UserBloc implements Bloc {
     return fireAuthProvider.singInFirebase();
   }
 
-  signOut() {
+  Future<void> signOutBloc() async {
     fireAuthProvider.signOut();
+  }
+
+  void getUsersList() async {
+    _provider.getUserList().then((users) {
+      _users = users;
+    }).catchError((err) {
+      print(err.toString());
+    });
   }
 
   @override

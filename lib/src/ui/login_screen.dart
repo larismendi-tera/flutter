@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: ButtonPurple(
                     title: "Login",
                     onPress: () {
-                      userBloc.signOut();
+                      userBloc.signOutBloc();
                       userBloc.singInFirebase().then((FirebaseUser user) =>
                           {print(user), print("usuario: ${user.displayName}")});
                     }),

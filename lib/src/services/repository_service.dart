@@ -11,7 +11,7 @@ abstract class RepositoryService {
 
   Future<FirebaseUser> singInFirebase();
 
-  Future<void> signOut();
+  void signOut();
 
   Future<void> registerUser(User user);
 
@@ -23,7 +23,7 @@ abstract class RepositoryService {
 
   Future<void> getEventsOnceOff();
 
-  Stream<void> listenToEventsRealTime();
+  Future listenToEventsRealTime();
 
   Future<void> deleteEvent(String documentId);
 

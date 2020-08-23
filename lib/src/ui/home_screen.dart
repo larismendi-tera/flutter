@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/constants.dart';
 import 'package:myapp/src/ui/feed_screen.dart';
 import 'package:myapp/src/ui/detail_screen.dart';
+import 'package:myapp/src/blocs/user_bloc.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:myapp/src/ui/form_event.dart';
 
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         DetailScreen()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          onTap: () {},
+          onTap: () => UserBloc().signOutBloc(),
           name: "LogOut",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
