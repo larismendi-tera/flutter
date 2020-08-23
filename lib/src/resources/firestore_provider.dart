@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:myapp/src/models/event.dart';
+import 'package:myapp/src/models/comment.dart';
 import 'package:myapp/src/models/user.dart';
 import 'package:myapp/src/services/cloud_storage_service.dart';
 
@@ -93,9 +94,7 @@ class FireStoreProvider {
       var user = await FirebaseAuth.instance.currentUser();
       var eventImage;
       if (user != null) {
-        print('Usuario autenticado');
         if (image != null) {
-          print('trajo imagen');
           eventImage =
               await CloudStorageService().uploadImage(imageToUpload: image);
         }
@@ -173,6 +172,28 @@ class FireStoreProvider {
       }
 
       return e.toString();
+    }
+  }
+
+  Future<void> createComment(Comment comment) async {
+    try {
+      var user = await FirebaseAuth.instance.currentUser();
+      if (user != null) {
+        _firestore.collection('coments').add({
+          'eventId': comment.eventId,
+          'message': comment.message,
+          'creator': user.toString(),
+          'createdAt': DateTime.now()
+        }).then((value) {
+          print(value.documentID);
+        });
+      }
+    } catch (e) {
+      if (e is PlatformException) {
+        log(e.message);
+      }
+
+      log(e.toString());
     }
   }
 }

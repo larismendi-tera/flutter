@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class User {
@@ -7,8 +8,8 @@ class User {
   final String avatar;
   final String birthday;
   final String aboutMe;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final Timestamp createdAt;
+  final Timestamp updatedAt;
 
   User(
       {this.id,

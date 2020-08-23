@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 class Event {
@@ -10,8 +11,8 @@ class Event {
   final String organizer;
   final String inventory;
   final String photoUrl;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final Timestamp createdAt;
+  final Timestamp updatedAt;
 
   Event(
       {this.documentId,

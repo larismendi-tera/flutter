@@ -1,16 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 class Comment {
   final String documentId;
-  final String postId;
+  final String eventId;
   final String message;
   final String creator;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final Timestamp createdAt;
+  final Timestamp updatedAt;
 
   Comment(
       {this.documentId,
-      @required this.postId,
+      @required this.eventId,
       @required this.message,
       this.creator,
       this.createdAt,
@@ -18,7 +19,7 @@ class Comment {
 
   Map<String, dynamic> toMap() {
     var createDoc = <String, Object>{};
-    if (postId != null) createDoc['postId'] = postId;
+    if (eventId != null) createDoc['eventId'] = eventId;
     if (message != null) createDoc['message'] = message;
     if (creator != null) createDoc['creator'] = creator;
     if (createdAt != null) createDoc['createdAt'] = createdAt;
@@ -32,7 +33,7 @@ class Comment {
 
     return Comment(
         documentId: map['documentId'],
-        postId: map['postId'],
+        eventId: map['eventId'],
         message: map['message'],
         creator: map['creator'],
         createdAt: map['createdAt'],

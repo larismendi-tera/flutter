@@ -25,7 +25,6 @@ class _FormEventState extends State<FormEvent> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-        print(_image);
       }
     });
   }

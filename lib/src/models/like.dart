@@ -1,40 +1,36 @@
 import 'package:flutter/foundation.dart';
 
-class Post {
+class Like {
   final String documentId;
-  final String postType;
-  final String body;
-  final String creator;
+  final String eventId;
+  final String userId;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  Post(
+  Like(
       {this.documentId,
-      @required this.postType,
-      @required this.body,
-      this.creator,
+      @required this.eventId,
+      @required this.userId,
       this.createdAt,
       this.updatedAt});
 
   Map<String, dynamic> toMap() {
     var createDoc = <String, Object>{};
-    if (postType != null) createDoc['postType'] = postType;
-    if (body != null) createDoc['body'] = body;
-    if (creator != null) createDoc['creator'] = creator;
+    if (eventId != null) createDoc['eventId'] = eventId;
+    if (userId != null) createDoc['userId'] = userId;
     if (createdAt != null) createDoc['createdAt'] = createdAt;
     if (updatedAt != null) createDoc['updatedAt'] = updatedAt;
 
     return createDoc;
   }
 
-  static Post fromMap(Map<String, dynamic> map, String documentId) {
+  static Like fromMap(Map<String, dynamic> map, String documentId) {
     if (map == null) return null;
 
-    return Post(
+    return Like(
         documentId: map['documentId'],
-        postType: map['postType'],
-        body: map['body'],
-        creator: map['creator'],
+        eventId: map['eventId'],
+        userId: map['userId'],
         createdAt: map['createdAt'],
         updatedAt: map['updatedAt']);
   }

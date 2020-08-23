@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:myapp/src/blocs/base_bloc.dart';
-import 'package:myapp/src/models/event.dart';
+import 'package:myapp/src/models/comment.dart';
 import 'package:myapp/src/resources/firestore_provider.dart';
 import 'package:myapp/src/ui/helpers/UiAction.dart';
 import 'package:rxdart/rxdart.dart';
@@ -11,23 +11,23 @@ enum ACTIONS {
   error,
 }
 
-class EventBloc extends BaseBloc {
+class CommentBloc extends BaseBloc {
   var _provider = FireStoreProvider();
   final _uiActions = BehaviorSubject<UiAction>();
-  List<Event> _events;
-  List<Event> get events => _events;
+  List<Comment> _comments;
+  List<Comment> get comments => _comments;
 
   Observable<UiAction> get actions => _uiActions.stream;
 
-  Future<void> createEventBloc(Event event, File image) async {
-    _provider.createEvent(event, image);
+  Future<void> createCommentBloc(Comment comment) async {
+    _provider.createComment(comment);
   }
 
-  void getEventsList() async {
+  void getCommentsList() async {
     setLoading(true);
-    _provider.getEventsOnceOff().then((events) {
+    _provider.getCommentsOnceOff().then((comments) {
       setLoading(false);
-      _events = events;
+      _comments = comments;
     }).catchError((err) {
       setLoading(false);
       _uiActions.sink.add(new UiAction(
@@ -35,11 +35,11 @@ class EventBloc extends BaseBloc {
     });
   }
 
-  void listenToEventsRealTime() async {
+  void listenToCommentsRealTime() async {
     setLoading(true);
-    _provider.listenToEventsRealTime().then((events) {
+    _provider.listenToCommentsRealTime().then((comments) {
       setLoading(false);
-      _events = events;
+      _comments = comments;
     }).catchError((err) {
       setLoading(false);
       _uiActions.sink.add(new UiAction(
@@ -47,9 +47,9 @@ class EventBloc extends BaseBloc {
     });
   }
 
-  void deleteEvent(String documentId) async {
+  void deleteComment(String documentId) async {
     setLoading(true);
-    _provider.deleteEvent(documentId).then((event) {
+    _provider.deleteComment(documentId).then((comment) {
       setLoading(false);
       _uiActions.sink.add(new UiAction(
           action: ACTIONS.showToast.index, message: 'Delete success'));
@@ -60,9 +60,9 @@ class EventBloc extends BaseBloc {
     });
   }
 
-  void updateEvent(Event event) async {
+  void updateComment(Comment comment) async {
     setLoading(true);
-    _provider.updateEvent(event).then((event) {
+    _provider.updateComment(comment).then((comment) {
       setLoading(false);
       _uiActions.sink.add(new UiAction(
           action: ACTIONS.showToast.index, message: 'Update success'));
