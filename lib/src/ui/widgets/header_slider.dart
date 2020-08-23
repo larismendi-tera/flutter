@@ -22,12 +22,10 @@ class _HeaderSliderState extends State<HeaderSlider> {
 
   @override
   void init() async {
-    print('object');
     var event = await eventBloc.getEventsList();
     setState(() {
       if (event != null) {
         event.forEach((element) {
-          print(jsonDecode(element.creator));
           events.add(HomeSlideItem(
               uid: jsonDecode(element.creator)["uid"],
               data: element,
@@ -38,7 +36,6 @@ class _HeaderSliderState extends State<HeaderSlider> {
               imageProfile: jsonDecode(element.creator)["photoUrl"],
               likes: 10,
               days: element.date));
-          //print(jsonDecode(element.creator));
         });
       }
     });

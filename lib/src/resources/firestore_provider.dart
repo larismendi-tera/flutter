@@ -98,7 +98,6 @@ class FireStoreProvider {
           eventImage =
               await CloudStorageService().uploadImage(imageToUpload: image);
         }
-        print(user.uid);
 
         Object userData = {
           "email": user.email,
@@ -107,10 +106,6 @@ class FireStoreProvider {
           "uid": user.uid,
           "photoUrl": user.photoUrl
         };
-        /*var data2 = jsonEncode(userData);
-        print(data2);
-        print('decode');
-        print(jsonDecode(data2)["email"]);*/
         _firestore.collection('events').add({
           'title': event.title,
           'description': event.description,
@@ -155,6 +150,8 @@ class FireStoreProvider {
   Future listenToEventsRealTime() async {
     // Register the handler for when the events data changes
     _eventsCollectionReference.snapshots().listen((eventsSnapshot) {
+      print("snapshot");
+      print(eventsSnapshot);
       if (eventsSnapshot.documents.isNotEmpty) {
         var events = eventsSnapshot.documents
             .map(

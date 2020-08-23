@@ -19,7 +19,6 @@ class UserEventBloc implements Bloc {
 
   void getEventsList() async {
     var users = await _provider.getUserList();
-    print(users);
     /*setLoading(true);
     _provider.getEventsOnceOff().then((events) {
       setLoading(false);

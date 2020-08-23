@@ -22,17 +22,12 @@ class _ContentPeopleState extends State<ContentPeople> {
 
   @override
   void init() async {
-    print('object');
     var users = await userBloc.getUsersList();
     setState(() {
       if (users != null) {
         users.forEach((element) {
-          print('aqui');
-          print(element.avatar);
-          //print(jsonDecode(element.creator));
           usersList.add(CardPeople(
               image: element.avatar, name: element.fullName, date: "Sep 7"));
-          //print(jsonDecode(element.creator));*/
         });
       }
     });
