@@ -10,7 +10,7 @@ class Event {
   final String creator;
   final String organizer;
   final String inventory;
-  final String eventImages;
+  final String photoUrl;
   final Timestamp createdAt;
   final Timestamp updatedAt;
 
@@ -23,7 +23,7 @@ class Event {
       this.organizer,
       this.creator,
       this.inventory,
-      this.eventImages,
+      this.photoUrl,
       this.createdAt,
       this.updatedAt});
 
@@ -36,7 +36,7 @@ class Event {
     if (creator != null) createDoc['creator'] = creator;
     if (organizer != null) createDoc['organizer'] = organizer;
     if (inventory != null) createDoc['inventory'] = inventory;
-    if (eventImages != null) createDoc['eventImages'] = eventImages;
+    if (photoUrl != null) createDoc['photoUrl'] = photoUrl;
     if (createdAt != null) createDoc['createdAt'] = createdAt;
     if (updatedAt != null) createDoc['updatedAt'] = updatedAt;
 
@@ -55,7 +55,7 @@ class Event {
         creator: map['creator'],
         organizer: map['organizer'],
         inventory: map['inventory'],
-        eventImages: map['eventImages'],
+        photoUrl: map['photoUrl'],
         createdAt: map['createdAt'],
         updatedAt: map['updatedAt']);
   }

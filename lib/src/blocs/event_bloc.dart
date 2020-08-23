@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:myapp/src/blocs/base_bloc.dart';
 import 'package:myapp/src/models/event.dart';
 import 'package:myapp/src/resources/firestore_provider.dart';
@@ -17,8 +19,8 @@ class EventBloc extends BaseBloc {
 
   Observable<UiAction> get actions => _uiActions.stream;
 
-  Future<void> createEventBloc(Event event) async {
-    _provider.createEvent(event);
+  Future<void> createEventBloc(Event event, File image) async {
+    _provider.createEvent(event, image);
   }
 
   getEventsList() async {

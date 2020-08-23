@@ -188,11 +188,13 @@ class _FormEventState extends State<FormEvent> {
                 ),
                 ButtonPurple(
                     onPress: () {
-                      EventBloc().createEventBloc(Event(
-                          title: title.text,
-                          description: description.text,
-                          date: date.text,
-                          location: location.text));
+                      EventBloc().createEventBloc(
+                          Event(
+                              title: title.text,
+                              description: description.text,
+                              date: date.text,
+                              location: location.text),
+                          _image);
                       clearTextInput();
                     },
                     title: "Guardar")

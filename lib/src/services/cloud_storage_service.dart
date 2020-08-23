@@ -4,7 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 
 class CloudStorageService {
-  Future<CloudStorageResult> uploadImage({@required File imageToUpload}) async {
+  Future uploadImage({@required File imageToUpload}) async {
     var imageFileName = DateTime.now().millisecondsSinceEpoch.toString();
 
     final StorageReference firebaseStorageRef =
