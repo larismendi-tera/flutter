@@ -20,13 +20,13 @@ class CardPeople extends StatelessWidget {
           padding: EdgeInsets.all(kDefaultPadding * .5),
           margin:
               EdgeInsets.only(left: kDefaultPadding, bottom: kDefaultPadding),
-          width: size.width * .3,
+          width: size.width * .4,
           height: size.height * .2,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: kPrimaryColor,
               image: DecorationImage(
-                  image: AssetImage(
+                  image: NetworkImage(
                     image,
                   ),
                   fit: BoxFit.cover)),
@@ -35,7 +35,7 @@ class CardPeople extends StatelessWidget {
           bottom: kDefaultPadding,
           left: kDefaultPadding,
           child: Container(
-            width: size.width * .3,
+            width: size.width * .4,
             height: size.height * .05,
             padding: EdgeInsets.only(
                 left: kDefaultPadding * .5, right: kDefaultPadding * .5),
@@ -56,7 +56,7 @@ class CardPeople extends StatelessWidget {
           ),
         ),
         Container(
-          width: size.width * .3,
+          width: size.width * .4,
           margin: EdgeInsets.only(left: kDefaultPadding),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
