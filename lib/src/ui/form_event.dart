@@ -20,6 +20,10 @@ class FormEvent extends StatefulWidget {
 class _FormEventState extends State<FormEvent> {
   @override
   Widget build(BuildContext context) {
+    final _controllerTitleEvent = TextEditingController();
+    final _controllerLocationEvent = TextEditingController();
+    final _controllerDateEvent = TextEditingController();
+    final _controllerDescriptionEvent = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: ListView(
@@ -46,31 +50,34 @@ class _FormEventState extends State<FormEvent> {
                 ),
                 TextInput(
                   label: "Titulo",
-                  controller: null,
-                  inputType: null,
+                  controller: _controllerTitleEvent,
+                  inputType: TextInputType.name,
+                  maxLine: 1,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 TextInput(
                   label: "Lugar",
-                  controller: null,
+                  controller: _controllerLocationEvent,
                   inputType: TextInputType.streetAddress,
+                  maxLine: 1,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 TextInput(
                   label: "fecha",
-                  controller: null,
-                  inputType: null,
+                  controller: _controllerDateEvent,
+                  inputType: TextInputType.datetime,
+                  maxLine: 1,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 TextInput(
                   label: "descripcion",
-                  controller: null,
+                  controller: _controllerDescriptionEvent,
                   inputType: TextInputType.multiline,
                   maxLine: 5,
                 ),
