@@ -55,7 +55,8 @@ class FireStoreProvider {
       'id': user.id,
       'fullName': user.fullName,
       'email': user.email,
-      'avatar': user.avatar
+      'avatar': user.avatar,
+      'createdAt': Timestamp.now()
     });
   }
 
@@ -183,7 +184,7 @@ class FireStoreProvider {
           'eventId': comment.eventId,
           'message': comment.message,
           'creator': user.toString(),
-          'createdAt': DateTime.now()
+          'createdAt': Timestamp.now()
         }).then((value) {
           print(value.documentID);
         });
