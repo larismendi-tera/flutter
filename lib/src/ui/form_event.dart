@@ -6,10 +6,6 @@ import 'package:myapp/src/blocs/event_bloc.dart';
 import 'package:myapp/constants.dart';
 import 'package:myapp/src/ui/widgets/button_purple.dart';
 import 'package:myapp/src/ui/widgets/text_input.dart';
-/*titulo,
-descripcion,
-lugar,
-fecha*/
 
 class FormEvent extends StatefulWidget {
   final File image;
@@ -33,6 +29,13 @@ class _FormEventState extends State<FormEvent> {
     date.dispose();
     description.dispose();
     super.dispose();
+  }
+
+  clearTextInput() {
+    title.clear();
+    location.clear();
+    date.clear();
+    description.clear();
   }
 
   @override
@@ -96,6 +99,7 @@ class _FormEventState extends State<FormEvent> {
                           description: description.text,
                           date: date.text,
                           location: location.text));
+                      clearTextInput();
                     },
                     title: "Guardar")
               ],
