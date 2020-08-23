@@ -3,6 +3,7 @@ import 'package:myapp/constants.dart';
 import 'package:myapp/src/ui/feed_screen.dart';
 import 'package:myapp/src/ui/detail_screen.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
+import 'package:myapp/src/ui/form_event.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -40,6 +41,14 @@ class _HomeScreenState extends State<HomeScreen> {
           colorLineSelected: kPrimaryColor,
         ),
         null));
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Crear Evento",
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
+          colorLineSelected: kPrimaryColor,
+        ),
+        FormEvent()));
 
     super.initState();
   }
