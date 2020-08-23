@@ -69,7 +69,6 @@ class FireStoreProvider {
   Future<void> createEvent(Event event) async {
     try {
       var user = await FirebaseAuth.instance.currentUser();
-      //log('User: $user');
       if (user != null) {
         _firestore.collection('events').add({
           'title': event.title,
@@ -80,14 +79,6 @@ class FireStoreProvider {
         }).then((value) {
           print(value.documentID);
         });
-        // _firestore.collection('events').document(event.documentId).setData({
-        //   'id': event.documentId,
-        //   'title': event.title,
-        //   'description': event.description,
-        //   'date': event.date,
-        //   'location': event.location,
-        //   'creator': user
-        // });
       }
     } catch (e) {
       if (e is PlatformException) {
