@@ -18,8 +18,8 @@ class Event {
       @required this.description,
       @required this.date,
       @required this.location,
-      @required this.creator,
-      @required this.organizer,
+      this.organizer,
+      this.creator,
       this.inventory,
       this.createdAt,
       this.updatedAt});
